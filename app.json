@@ -1,4 +1,11 @@
 {
   "name": "split",
-  "displayName": "split"
+  "displayName": "split",
+  "expo": {
+    "extra": {
+      "eas": {
+        "projectId": "8c9e2ea3-5f45-4c8f-b807-113c277e8a28"
+      }
+    }
+  }
 }
