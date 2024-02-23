@@ -1,4 +1,4 @@
-import {  Text, Platform,  View, PermissionsAndroid } from 'react-native';
+import {  Text, Platform,  View, PermissionsAndroid, TouchableOpacity } from 'react-native';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import HomeScreen from '../screen/HomeScreen';
 import DetailScreen from '../screen/DetailScreen';
@@ -11,6 +11,9 @@ import FontAwesome6 from 'react-native-vector-icons/FontAwesome6'
 import Entypo from 'react-native-vector-icons/Entypo'
 import FriendScreen from '../screen/FriendScreen';
 import {launchCamera, launchImageLibrary} from 'react-native-image-picker';
+import React, { useState } from 'react';
+
+
 
 const AccessCamera = async () =>{
   const granted = await PermissionsAndroid.request(
@@ -35,7 +38,8 @@ const AccessCamera = async () =>{
 // Thanks for watching
 const Tab =createBottomTabNavigator();
 
-const TabNavi = () => {
+function TabNavi() {
+  const [navistate , setnavistate] = useState(true)
   return (
        <Tab.Navigator screenOptions={{headerShown:false, tabBarHideOnKeyboard:true, tabBarShowLabel:false, tabBarStyle: styles.tabBarStyle}}>
           <Tab.Screen 
@@ -86,7 +90,9 @@ const TabNavi = () => {
                   <MaterialCommunityIcons name='line-scan' size={30} color={focused ? "#FFFFFF": "#FFFFFF"} />
                 </View>
               )
-            }
+            },
+
+            // tabBarButton: () => (<TouchableOpacity onPress={()=>setnavistate(true)}></TouchableOpacity>)
            }}
           />
           <Tab.Screen
