@@ -1,16 +1,13 @@
 import React from 'react';
 import { StyleSheet,Text, Button, View, ImageComponent, Image, Pressable } from 'react-native';
 import { useNavigation } from '@react-navigation/native';
-import { useSafeAreaInsets } from 'react-native-safe-area-context';
 import Ionicons from 'react-native-vector-icons/Ionicons'
-import IMAGES from '../images';
-import SplitScreen from '../screen/SplitScreen';
 
 const MainHeader = ({title}) => {
   return (
     <View style={[styles.cointainer]}>
       <Text style={styles.title}>Welcome {title}!</Text>
-      <Ionicons name='notifications' size={25} onPress={() => {}} color='#FFFFFF'/>
+      <Ionicons name='notifications' size={25} onPress={() => {}} color='#ACACAC'/>
     </View>
     
   );
@@ -26,8 +23,8 @@ const styles = StyleSheet.create({
     },
     title:{
         fontSize:20,
-        fontWeight:'bold',
-        color:'#FFFFFF'
+        fontWeight:'300',
+        color:'#0F0F0F'
     }
 })
 

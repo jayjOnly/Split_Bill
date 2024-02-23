@@ -20,16 +20,12 @@ const AccessCamera = async () => {
   }else{
     console.log("NO PERMISSION")
   }
-  
-  
 }
 
 const SplitScreen = () => {
-
   return (
-    <View>
-      <Text>Testing</Text>
-      <Button
+    <View style={styles.page}>
+      <Button 
         onPress={AccessCamera}
         title="Learn More"
         color="red"
@@ -39,5 +35,19 @@ const SplitScreen = () => {
     
   );
 };
+
+const styles = StyleSheet.create({
+  page:{
+    alignContent:'center',
+    justifyContent:'center',
+    flex:1
+  },
+  ScanButton:{
+    height:30
+  },
+  ScanText:{
+
+  }
+})
 
 export default SplitScreen;

@@ -1,4 +1,4 @@
-import {  Text, Platform,  View } from 'react-native';
+import {  Text, Platform,  View, PermissionsAndroid } from 'react-native';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import HomeScreen from '../screen/HomeScreen';
 import DetailScreen from '../screen/DetailScreen';
@@ -10,6 +10,27 @@ import FontAwesome5 from 'react-native-vector-icons/FontAwesome5'
 import FontAwesome6 from 'react-native-vector-icons/FontAwesome6'
 import Entypo from 'react-native-vector-icons/Entypo'
 import FriendScreen from '../screen/FriendScreen';
+import {launchCamera, launchImageLibrary} from 'react-native-image-picker';
+
+const AccessCamera = async () =>{
+  const granted = await PermissionsAndroid.request(
+    PermissionsAndroid.PERMISSIONS.CAMERA,
+  )
+
+  if(granted === PermissionsAndroid.RESULTS.GRANTED){
+    const result = await launchCamera({mediaType: 'photo', quality: 1}, (res) => {
+      if(res.didCancel){
+        console.log("User Cancel")
+      }else if(res.errorCode){
+        console.log(res.errorCode)
+      }else{
+        console.log(res.assets)
+      }
+    })
+  }else{
+    console.log("NO PERMISSION")
+  } 
+}
 
 // Thanks for watching
 const Tab =createBottomTabNavigator();
@@ -55,7 +76,7 @@ const TabNavi = () => {
                  style={{
                   alignItems: "center",
                   justifyContent: "center",
-                  backgroundColor: "#16247d",
+                  backgroundColor: "#23A83F",
                   width: Platform.OS == "ios" ? 50 : 60,
                   height: Platform.OS == "ios" ? 50 : 60,
                   top: Platform.OS == "ios" ? -10 : -20,

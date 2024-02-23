@@ -7,12 +7,18 @@ import {
   Text,
   TouchableOpacity,
   Image,
+  Switch
 } from 'react-native';
 import FeatherIcon from 'react-native-vector-icons/Feather'
 import AntDesign from 'react-native-vector-icons/AntDesign'
 import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons'
 
+
 export default function Example() {
+  const [form, setForm] = useState({
+    darkMode: false
+  });
+
   return (
     <SafeAreaView style={{ flex: 1, backgroundColor: '#fff'}}>
       <View style={styles.container}>
@@ -74,6 +80,21 @@ export default function Example() {
                 name="chevron-right"
                 size={20} />
             </TouchableOpacity>
+
+            <View style={styles.row}>
+              <View style={[styles.rowIcon, { backgroundColor: '#007afe' }]}>
+                <FeatherIcon color="#fff" name="moon" size={20} />
+              </View>
+
+              <Text style={styles.rowLabel}>Dark Mode</Text>
+
+              <View style={styles.rowSpacer} />
+
+              <Switch
+                onValueChange={darkMode => setForm({ ...form, darkMode })}
+                value={form.darkMode} />
+            </View>
+
           </View>
 
           <View style={styles.section}>

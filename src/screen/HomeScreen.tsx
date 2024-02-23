@@ -2,6 +2,7 @@ import React from 'react';
 import { StyleSheet,Text, Button, View, ScrollView, SafeAreaView} from 'react-native';
 import { useNavigation } from '@react-navigation/native';
 import MainHeader from '../components/MainHeader';
+import ActivityBox from '../components/ActivityBox';
 
 const HomeScreen = () => {
   return (
@@ -15,36 +16,12 @@ const HomeScreen = () => {
           <View style={styles.activity}>
             <Text style={styles.title}>Activity</Text>
 
-            <View style={styles.box}>
-              <Text>Judul 1</Text>
-              <Text>Rp.100.000</Text>
-              <Button title='Lihat Detail'/>
-            </View>
-            <View style={styles.box}>
-              <Text>Judul 1</Text>
-              <Text>Rp.100.000</Text>
-              <Button title='Lihat Detail'/>
-            </View>
-            <View style={styles.box}>
-              <Text>Judul 1</Text>
-              <Text>Rp.100.000</Text>
-              <Button title='Lihat Detail'/>
-            </View>
-            <View style={styles.box}>
-              <Text>Judul 1</Text>
-              <Text>Rp.100.000</Text>
-              <Button title='Lihat Detail'/>
-            </View>
-            <View style={styles.box}>
-              <Text>Judul 1</Text>
-              <Text>Rp.100.000</Text>
-              <Button title='Lihat Detail'/>
-            </View>
-            <View style={styles.box}>
-              <Text>Judul 1</Text>
-              <Text>Rp.100.000</Text>
-              <Button title='Lihat Detail'/>
-            </View>
+            <ActivityBox />
+            <ActivityBox />
+            <ActivityBox />
+            <ActivityBox />
+            <ActivityBox />
+            <ActivityBox />
           </View>
         </ScrollView>
       </View>
@@ -55,26 +32,28 @@ const HomeScreen = () => {
 const styles = StyleSheet.create({
   box:{
     flex:1,
-    backgroundColor:'#FFFFFF',
+    backgroundColor:'#EEEEEE',
     borderRadius:20,
     justifyContent:'center',
     marginBottom:20,
     padding:15
   },
   container:{
-    backgroundColor:'#000000',
+    backgroundColor:'#FFFFFF',
     paddingBottom:40
   },
   title:{
-    fontSize:25,
-    color:'#FFFFFF',
-    marginBottom:10
+    fontSize:20,
+    color:'#0F0F0F',
+    marginBottom:10,
+    fontWeight:'400'
   },
   activity:{
-    backgroundColor:'#808080',
+    backgroundColor:'#EEEEEE',
     paddingHorizontal: 15,
     paddingVertical:15,
-    borderRadius:25
+    borderRadius:25,
+    marginHorizontal:15
   }
 })
 
