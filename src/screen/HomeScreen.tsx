@@ -4,24 +4,24 @@ import { useNavigation } from '@react-navigation/native';
 import MainHeader from '../components/MainHeader';
 import ActivityBox from '../components/ActivityBox';
 
-const HomeScreen = () => {
+const HomeScreen = ({navigation}: {navigation: any}) => {
   return (
     <SafeAreaView style={{flex:1}}>
       <View style={styles.container}>
         <View>
-          <MainHeader title="Udin"/>
+          <MainHeader title="Udin" navi={() => navigation.navigate("Notification")}/>
         </View>
 
         <ScrollView>
           <View style={styles.activity}>
             <Text style={styles.title}>Activity</Text>
 
-            <ActivityBox />
-            <ActivityBox />
-            <ActivityBox />
-            <ActivityBox />
-            <ActivityBox />
-            <ActivityBox />
+            <ActivityBox navi={() => navigation.navigate("Details")}/>
+            <ActivityBox navi={() => navigation.navigate("Details")} />
+            <ActivityBox navi={() => navigation.navigate("Details")}/>
+            <ActivityBox navi={() => navigation.navigate("Details")}/>
+            <ActivityBox navi={() => navigation.navigate("Details")}/>
+            <ActivityBox navi={() => navigation.navigate("Details")}/>
           </View>
         </ScrollView>
       </View>

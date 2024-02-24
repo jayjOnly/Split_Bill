@@ -1,16 +1,14 @@
 import { StyleSheet, Text, View, TouchableOpacity} from 'react-native'
 import React from 'react'
 
-const ActivityBoz = () => {
+const ActivityBoz = ({navi}) => {
   return (
     <View>
       <View style={styles.box}>
         <Text style={styles.text}>Judul | DD-MM-YY</Text>
         <Text style={styles.harga}>Rp.100.000</Text>
         <TouchableOpacity
-            onPress={() => {
-                // handle onPress
-            }}
+            onPress={navi}
             style={styles.Button}>
 
             <Text style={styles.ButtonLabel}>View Detail</Text>

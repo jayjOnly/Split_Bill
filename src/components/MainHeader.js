@@ -3,11 +3,11 @@ import { StyleSheet,Text, Button, View, ImageComponent, Image, Pressable } from 
 import { useNavigation } from '@react-navigation/native';
 import Ionicons from 'react-native-vector-icons/Ionicons'
 
-const MainHeader = ({title}) => {
+const MainHeader = ({title, navi}) => {
   return (
     <View style={[styles.cointainer]}>
       <Text style={styles.title}>Welcome {title}!</Text>
-      <Ionicons name='notifications' size={25} onPress={() => {}} color='#ACACAC'/>
+      <Ionicons name='notifications' size={25} onPress={navi} color='#ACACAC'/>
     </View>
     
   );

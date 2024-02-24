@@ -44,7 +44,7 @@ const AcessGallery = async () => {
 const Tab =createBottomTabNavigator();
 
 function TabNavi() {
-  const [state , setstate] = useState(true)
+  const [state , setstate] = useState(false)
   return (
        <Tab.Navigator screenOptions={{headerShown:false, tabBarHideOnKeyboard:true, tabBarShowLabel:false, tabBarStyle: styles.tabBarStyle}}>
           <Tab.Screen 
