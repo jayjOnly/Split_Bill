@@ -322,7 +322,7 @@ const styles = StyleSheet.create({
   signout: {
     alignItems: 'center',
     height: 40,
-    backgroundColor: '#FF0000',
+    backgroundColor: '#E71919',
     borderRadius: 20,
     marginBottom: 12,
   }

@@ -7,7 +7,7 @@ const MainHeader = ({title, navi}) => {
   return (
     <View style={[styles.cointainer]}>
       <Text style={styles.title}>Welcome {title}!</Text>
-      <Ionicons name='notifications' size={25} onPress={navi} color='#ACACAC'/>
+      <Ionicons name='notifications' size={25} onPress={navi} color='#0F0F0F'/>
     </View>
     
   );
@@ -22,9 +22,9 @@ const styles = StyleSheet.create({
       paddingVertical:15,
     },
     title:{
-        fontSize:20,
-        fontWeight:'300',
-        color:'#0F0F0F'
+        fontSize:18,
+        color:'#0F0F0F',
+        fontFamily:'Montserrat-Regular'
     }
 })
 

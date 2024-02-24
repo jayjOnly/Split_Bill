@@ -102,11 +102,12 @@ function TabNavi() {
                     <View style={{
                     alignItems: "center",
                     justifyContent: "center",
-                    backgroundColor: "#23A83F",
+                    backgroundColor: "#16247d",
                     width: Platform.OS == "ios" ? 50 : 60,
                     height: Platform.OS == "ios" ? 50 : 60,
                     top: Platform.OS == "ios" ? -10 : -20,
-                    borderRadius: Platform.OS == "ios" ? 25 : 30
+                    borderRadius: Platform.OS == "ios" ? 25 : 30,
+                    elevation:10
                     }}>
                       <TouchableOpacity 
                       style={{
@@ -130,6 +131,7 @@ function TabNavi() {
                           color: '#B9B9B9',
                           fontWeight: 'bold',
                           margin:7,
+                          marginBottom:20,
                           textAlign:"center"
                         }}>What would you like to choose?</Text>
                         
@@ -148,8 +150,8 @@ function TabNavi() {
                           <View style={{alignContent:'center'}}>
                             <TouchableOpacity style={{
                               backgroundColor:"#DCE1F0",
-                              width:70,
-                              height:54,
+                              width:80,
+                              height:60,
                               borderRadius:5,
                               alignContent:'center',
                               justifyContent:'center'
@@ -161,27 +163,27 @@ function TabNavi() {
                               fontWeight: 'bold',
                               textAlign:'center',
                               color: '#B9B9B9',
-                              marginTop: 3
+                              marginTop:7
                             }}>Gallery</Text>
                           </View>
 
                           <View style={{alignContent:'center',marginLeft:80}}>
                             <TouchableOpacity style={{
                               backgroundColor:"#DCE1F0",
-                              width:70,
-                              height:54,
+                              width:80,
+                              height:60,
                               borderRadius:5,
                               alignContent:'center',
                               justifyContent:'center'
                             }} onPress={AccessCamera}>
-                            <MaterialCommunityIcons name='camera' size={45} color={"#33363E"} style={{alignSelf:'center'}} />
+                            <MaterialCommunityIcons name='camera' size={50} color={"#33363E"} style={{alignSelf:'center'}} />
                             </TouchableOpacity>
                             <Text style={{
                               fontSize: 11,
                               fontWeight: 'bold',
                               textAlign:'center',
                               color: '#B9B9B9',
-                              marginTop: 3
+                              marginTop:7,
                             }}>Camera</Text>
 
                           </View>        
@@ -248,9 +250,10 @@ const styles = {
 
   modalview:{
     backgroundColor:"white",
-    paddingVertical:15,
     paddingHorizontal:20,
-    borderRadius:15
+    borderRadius:15,
+    paddingBottom:23,
+    paddingTop:15
   },
   
 

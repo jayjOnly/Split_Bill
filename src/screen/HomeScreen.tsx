@@ -1,5 +1,5 @@
 import React from 'react';
-import { StyleSheet,Text, Button, View, ScrollView, SafeAreaView} from 'react-native';
+import { StyleSheet,Text, Button, View, ScrollView, SafeAreaView, StatusBar} from 'react-native';
 import { useNavigation } from '@react-navigation/native';
 import MainHeader from '../components/MainHeader';
 import ActivityBox from '../components/ActivityBox';
@@ -7,6 +7,7 @@ import ActivityBox from '../components/ActivityBox';
 const HomeScreen = ({navigation}: {navigation: any}) => {
   return (
     <SafeAreaView style={{flex:1}}>
+      {/* <StatusBar backgroundColor={'#FFFFFF'} /> */}
       <View style={styles.container}>
         <View>
           <MainHeader title="Udin" navi={() => navigation.navigate("Notification")}/>
@@ -46,7 +47,7 @@ const styles = StyleSheet.create({
     fontSize:20,
     color:'#0F0F0F',
     marginBottom:10,
-    fontWeight:'400'
+    fontFamily:'Montserrat-Regular'
   },
   activity:{
     backgroundColor:'#EEEEEE',

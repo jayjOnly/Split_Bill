@@ -6,7 +6,7 @@ const ActivityBoz = ({navi}) => {
     <View>
       <View style={styles.box}>
         <Text style={styles.text}>Judul | DD-MM-YY</Text>
-        <Text style={styles.harga}>Rp.100.000</Text>
+        <Text style={styles.harga}>Rp. 100.000</Text>
         <TouchableOpacity
             onPress={navi}
             style={styles.Button}>
@@ -30,19 +30,20 @@ const styles = StyleSheet.create({
     padding:15
   },
   text:{
-    fontWeight:'400',
-    marginBottom:5
+    marginBottom:5,
+    fontFamily:'Montserrat-Regular',
+    color:'#6C757D'
   },
   harga:{
-    fontWeight:'bold',
     marginBottom:20,
     fontSize:25,
+    fontFamily:'Montserrat-Regular',
     color:'#000000'
   },
   ButtonLabel:{
-    fontSize: 15,
+    fontSize: 17,
     color: '#FFFFFF',
-    fontWeight: '400',
+    fontFamily:'Montserrat-Regular',
     margin:7,
     padding:2
   },
