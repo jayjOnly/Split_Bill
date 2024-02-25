@@ -8,7 +8,7 @@ import {
   StyleSheet
 } from 'react-native';
 
-import CustomButton from '../components/CustomButton'
+
 import InputField from '../components/InputField'
 import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons'
 import { useNavigation } from '@react-navigation/native';
@@ -45,7 +45,7 @@ const LoginScreen = ({navigation}: {navigation: any}) => {
         <InputField
           label={'Email ID'}
           icon={
-            <MaterialCommunityIcons name='image-multiple-outline' size={20} color={"#666"} style={{marginRight: 5}} />    
+            <MaterialCommunityIcons name='at' size={20} color={"#666"} style={{marginRight: 5}} />    
           }
           inputType={'any'}
           keyboardType="email-address"
@@ -56,10 +56,10 @@ const LoginScreen = ({navigation}: {navigation: any}) => {
       <InputField
           label={'Password'}
           icon={
-            <MaterialCommunityIcons name='image-multiple-outline' size={20} color={"#666"} style={{marginRight: 5}} />
+            <MaterialCommunityIcons name='lock-outline' size={20} color={"#666"} style={{marginRight: 5}} />
           }
           inputType="password"
-          keyboardType={'any'}
+          keyboardType={'ascii-capable'}
           fieldButtonLabel={"Forgot?"}
           fieldButtonFunction={() => {}}
         />
@@ -67,7 +67,7 @@ const LoginScreen = ({navigation}: {navigation: any}) => {
         <TouchableOpacity
       onPress={()=> navigation.navigate("BottomTab")}
       style={{
-        backgroundColor: '#AD40AF',
+        backgroundColor: '#7B2FF8',
         padding: 20,
         borderRadius: 10,
         marginBottom: 30,
@@ -138,7 +138,7 @@ const LoginScreen = ({navigation}: {navigation: any}) => {
           <TouchableOpacity 
            onPress={() => navigation.navigate('Register')}
           >
-            <Text style={{color: '#AD40AF', fontWeight: '700'}}> Register</Text>
+            <Text style={{color: '#7B2FF8', fontWeight: '700'}}> Register</Text>
           </TouchableOpacity>
         </View>
       </View>
