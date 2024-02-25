@@ -1,11 +1,149 @@
-import { StyleSheet, Text, View } from 'react-native'
-import React from 'react'
+import React from 'react';
+import {
+  SafeAreaView,
+  View,
+  Text,
+  TextInput,
+  TouchableOpacity,
+  StyleSheet
+} from 'react-native';
 
-const LoginScreen = () => {
+import CustomButton from '../components/CustomButton'
+import InputField from '../components/InputField'
+import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons'
+import { useNavigation } from '@react-navigation/native';
+
+
+// import GoogleSVG from '../assets/images/google.svg'
+// import FacebookSVG from '../assets/images/facebook.svg';
+// import TwitterSVG from '../assets/images/twitter.svg';
+
+const LoginScreen = (props) => {
   return (
-    <View>
-      <Text>LoginScreen</Text>
-    </View>
+    <SafeAreaView style={{flex: 1, justifyContent: 'center'}}>
+       <SafeAreaView style={{flex: 1, justifyContent: 'center'}}>
+      <View style={{paddingHorizontal: 25}}>
+        {/* <View style={{alignItems: 'center'}}>
+          <LoginSVG
+            height={300}
+            width={300}
+            style={{transform: [{rotate: '-5deg'}]}}
+          />
+        </View> */}
+        
+        <Text
+          style={{
+            fontFamily: 'Roboto-Medium',
+            fontSize: 28,
+            fontWeight: '500',
+            color: '#333',
+            marginBottom: 30,
+          }}>
+          Login
+        </Text>
+
+        <InputField
+          label={'Email ID'}
+          icon={
+            <MaterialCommunityIcons name='image-multiple-outline' size={20} color={"#666"} style={{marginRight: 5}} />    
+          }
+          inputType={'any'}
+          keyboardType="email-address"
+          fieldButtonLabel={''}
+          fieldButtonFunction={'any'}
+        />
+
+      <InputField
+          label={'Password'}
+          icon={
+            <MaterialCommunityIcons name='image-multiple-outline' size={20} color={"#666"} style={{marginRight: 5}} />
+          }
+          inputType="password"
+          keyboardType={'any'}
+          fieldButtonLabel={"Forgot?"}
+          fieldButtonFunction={() => {}}
+        />
+        
+        <TouchableOpacity
+      onPress={()=> props.navigation.navigate("BottomTab")}
+      style={{
+        backgroundColor: '#AD40AF',
+        padding: 20,
+        borderRadius: 10,
+        marginBottom: 30,
+      }}>
+      <Text
+        style={{
+          textAlign: 'center',
+          fontWeight: '700',
+          fontSize: 16,
+          color: '#fff',
+        }}>
+        Login
+      </Text>
+    </TouchableOpacity>
+
+        {/* <Text style={{textAlign: 'center', color: '#666', marginBottom: 30}}>
+          Or, login with ...
+        </Text>
+
+        <View
+          style={{
+            flexDirection: 'row',
+            justifyContent: 'space-between',
+            marginBottom: 30,
+          }}>
+          <TouchableOpacity
+            onPress={() => {}}
+            style={{
+              borderColor: '#ddd',
+              borderWidth: 2,
+              borderRadius: 10,
+              paddingHorizontal: 30,
+              paddingVertical: 10,
+            }}>
+            <GoogleSVG height={24} width={24} />
+          </TouchableOpacity>
+          <TouchableOpacity
+            onPress={() => {}}
+            style={{
+              borderColor: '#ddd',
+              borderWidth: 2,
+              borderRadius: 10,
+              paddingHorizontal: 30,
+              paddingVertical: 10,
+            }}>
+            <FacebookSVG height={24} width={24} />
+          </TouchableOpacity>
+          <TouchableOpacity
+            onPress={() => {}}
+            style={{
+              borderColor: '#ddd',
+              borderWidth: 2,
+              borderRadius: 10,
+              paddingHorizontal: 30,
+              paddingVertical: 10,
+            }}>
+            <TwitterSVG height={24} width={24} />
+          </TouchableOpacity>
+        </View> */}
+
+        <View
+          style={{
+            flexDirection: 'row',
+            justifyContent: 'center',
+            marginBottom: 30,
+          }}>
+          <Text>New to the app?</Text>
+          <TouchableOpacity 
+           onPress={() => props.navigation.navigate('Register')}
+          >
+            <Text style={{color: '#AD40AF', fontWeight: '700'}}> Register</Text>
+          </TouchableOpacity>
+        </View>
+      </View>
+    </SafeAreaView>
+    </SafeAreaView>
   )
 }
 
