@@ -12,7 +12,6 @@ import {
 import DatePicker from 'react-native-date-picker';
 import InputField from '../components/InputField';
 import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons'
-import CustomButton from '../components/CustomButton';
 
 const RegisterScreen = ({navigation}: {navigation: any}) => {
   // console.log(props)
@@ -86,10 +85,10 @@ const RegisterScreen = ({navigation}: {navigation: any}) => {
         <InputField
           label={'Full Name'}
           icon={
-            <MaterialCommunityIcons name='image-multiple-outline' size={20} color={"#666"} style={{marginRight: 5}} />    
+            <MaterialCommunityIcons name='account-outline' size={20} color={"#666"} style={{marginRight: 5}} />    
           }
           inputType={'name'}
-          keyboardType="any"
+          keyboardType={'ascii-capable'}
           fieldButtonLabel={''}
           fieldButtonFunction={'any'}
         />
@@ -97,11 +96,11 @@ const RegisterScreen = ({navigation}: {navigation: any}) => {
         <InputField
           label={'Email ID'}
           icon={
-            <MaterialCommunityIcons name='image-multiple-outline' size={20} color={"#666"} style={{marginRight: 5}} />    
+            <MaterialCommunityIcons name='at' size={20} color={"#666"} style={{marginRight: 5}} />    
 
           }
-          inputType={'any'}
-          keyboardType="email-address"
+          inputType={'email'}
+          keyboardType={"email-address"}
           fieldButtonLabel={''}
           fieldButtonFunction={'any'}
         />
@@ -109,10 +108,10 @@ const RegisterScreen = ({navigation}: {navigation: any}) => {
         <InputField
           label={'Password'}
           icon={
-            <MaterialCommunityIcons name='image-multiple-outline' size={20} color={"#666"} style={{marginRight: 5}} />    
+            <MaterialCommunityIcons name='lock-outline' size={20} color={"#666"} style={{marginRight: 5}} />    
           }
           inputType="password"
-          keyboardType="any"
+          keyboardType={'ascii-capable'}
           fieldButtonLabel={''}
           fieldButtonFunction={'any'}
         />
@@ -120,10 +119,10 @@ const RegisterScreen = ({navigation}: {navigation: any}) => {
         <InputField
           label={'Confirm Password'}
           icon={
-            <MaterialCommunityIcons name='image-multiple-outline' size={20} color={"#666"} style={{marginRight: 5}} />    
+            <MaterialCommunityIcons name='lock-check-outline' size={20} color={"#666"} style={{marginRight: 5}} />    
           }
           inputType="password"
-          keyboardType="any"
+          keyboardType={'ascii-capable'}
           fieldButtonLabel={''}
           fieldButtonFunction={'any'}
         />
@@ -163,7 +162,24 @@ const RegisterScreen = ({navigation}: {navigation: any}) => {
           }}
         /> */}
 
-        <CustomButton label={'Register'} onPress={() => navigation.navigate("Login")} />
+        <TouchableOpacity
+          onPress={() => navigation.navigate("Login")}
+          style={{
+            backgroundColor: '#7B2FF8',
+            padding: 20,
+            borderRadius: 10,
+            marginBottom: 30,
+          }}>
+          <Text
+            style={{
+              textAlign: 'center',
+              fontWeight: '700',
+              fontSize: 16,
+              color: '#fff',
+            }}>
+            Register
+          </Text>
+        </TouchableOpacity>
 
         <View style={{alignSelf: 'center',}}>
           <Text>By signing up you agree to our</Text>
@@ -178,13 +194,13 @@ const RegisterScreen = ({navigation}: {navigation: any}) => {
           <TouchableOpacity 
           // onPress={() => navigation.goBack()}
           >
-            <Text style={{color: '#AD40AF', fontWeight: '700'}}>Term of Use</Text>
+            <Text style={{color: '#7B2FF8', fontWeight: '700'}}>Term of Use</Text>
           </TouchableOpacity>
           <Text> and </Text>
           <TouchableOpacity 
           // onPress={() => navigation.goBack()}
           >
-            <Text style={{color: '#AD40AF', fontWeight: '700'}}> Privacy Policy</Text>
+            <Text style={{color: '#7B2FF8', fontWeight: '700'}}> Privacy Policy</Text>
           </TouchableOpacity>
         </View>
       </ScrollView>
