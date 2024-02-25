@@ -14,7 +14,7 @@ import InputField from '../components/InputField';
 import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons'
 import CustomButton from '../components/CustomButton';
 
-const RegisterScreen = (props) => {
+const RegisterScreen = ({navigation}: {navigation: any}) => {
   // console.log(props)
   const [date, setDate] = useState(new Date());
   const [open, setOpen] = useState(false);
@@ -163,7 +163,7 @@ const RegisterScreen = (props) => {
           }}
         /> */}
 
-        <CustomButton label={'Register'} onPress={() => props.navigation.navigate("BottomTab")} />
+        <CustomButton label={'Register'} onPress={() => navigation.navigate("Login")} />
 
         <View style={{alignSelf: 'center',}}>
           <Text>By signing up you agree to our</Text>

@@ -18,7 +18,7 @@ import { useNavigation } from '@react-navigation/native';
 // import FacebookSVG from '../assets/images/facebook.svg';
 // import TwitterSVG from '../assets/images/twitter.svg';
 
-const LoginScreen = (props) => {
+const LoginScreen = ({navigation}: {navigation: any}) => {
   return (
     <SafeAreaView style={{flex: 1, justifyContent: 'center'}}>
        <SafeAreaView style={{flex: 1, justifyContent: 'center'}}>
@@ -65,7 +65,7 @@ const LoginScreen = (props) => {
         />
         
         <TouchableOpacity
-      onPress={()=> props.navigation.navigate("BottomTab")}
+      onPress={()=> navigation.navigate("BottomTab")}
       style={{
         backgroundColor: '#AD40AF',
         padding: 20,
@@ -136,7 +136,7 @@ const LoginScreen = (props) => {
           }}>
           <Text>New to the app?</Text>
           <TouchableOpacity 
-           onPress={() => props.navigation.navigate('Register')}
+           onPress={() => navigation.navigate('Register')}
           >
             <Text style={{color: '#AD40AF', fontWeight: '700'}}> Register</Text>
           </TouchableOpacity>
