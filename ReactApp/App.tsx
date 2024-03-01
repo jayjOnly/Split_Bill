@@ -7,6 +7,7 @@ import NotificationScreen from './src/screen/NotificationScreen'
 import ViewDetailScreen from './src/screen/ViewDetailScreen'
 import LoginScreen from './src/screen/LoginScreen'
 import RegisterScreen from './src/screen/RegisterScreen'
+import TestScreen from './src/screen/Test'
 
 const Stack = createNativeStackNavigator();
 
@@ -14,10 +15,11 @@ const App = () => {
   return (
     <NavigationContainer>
       {/* <StatusBar backgroundColor={'#FFFFFF'} /> */}
+      
       <Stack.Navigator screenOptions={{headerShown:false}}>
+        <Stack.Screen name='Test' component={TestScreen}/>
         <Stack.Screen name='Login' component={LoginScreen}/>
         <Stack.Screen name='Register' component={RegisterScreen}/>
-        
         
         <Stack.Screen name='BottomTab' component={TabNavi}/>
         <Stack.Screen name='Notification' component={NotificationScreen}/>
