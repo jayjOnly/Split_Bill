@@ -17,7 +17,7 @@ const App = () => {
       {/* <StatusBar backgroundColor={'#FFFFFF'} /> */}
       
       <Stack.Navigator screenOptions={{headerShown:false}}>
-        <Stack.Screen name='Test' component={TestScreen}/>
+        {/* <Stack.Screen name='Test' component={TestScreen}/> */}
         <Stack.Screen name='Login' component={LoginScreen}/>
         <Stack.Screen name='Register' component={RegisterScreen}/>
         
