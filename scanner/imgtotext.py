@@ -7,7 +7,7 @@ tess.pytesseract.tesseract_cmd = r'..\Tesseract-OCR\tesseract.exe'
 
 Item = namedtuple('Item','qty name price')
 
-img = Image.open('struk4.png')
+img = Image.open('image/struk.png')
 
 text=tess.image_to_string(img)
 
@@ -25,4 +25,4 @@ for line in text.split('\n'):
         price = line.group(3)
         line_item.append(Item(qty,name,price))
 
-print(line_item[0])
+print(line_item)

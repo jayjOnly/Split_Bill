@@ -5,25 +5,64 @@ import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityI
 import Modal from "react-native-modal";
 import { useIsFocused } from '@react-navigation/native';
 
-const AcessAPI = async () => {
-    const [data, setData] = useState([])
-    useEffect(()=> {
-        fetch("/member").then(
-          res => res.json()
-        ).then(
-            x => {
-            setData(x)
-            console.log(x)
-            }
-        )
-    }, [])
+
+const uploadImage = async ({imageUri}:{imageUri:string}, {imageType}:{imageType:string}, {imageName}:{imageName:string}) => {
+  const formData = new FormData();
+  formData.append('file', {
+    uri: imageUri,
+    type: imageType, // adjust the type according to your image format
+    name: imageName, // you can adjust the filename as well
+  });
+
+  try {
+    const response = await fetch('http://10.0.2.2:5000/upload', {
+      method: 'POST',
+      body: formData,
+      headers: {
+        'Content-Type': 'multipart/form-data',
+      },
+    });
+    const data = await response.json();
+    console.log(data);
+  } catch (error) {
+    console.error('Error:', error);
+  }
+};
+
+const AcessGallery = async () => {
+  const result = await launchImageLibrary({mediaType: 'photo', quality: 1})
+  if(result.assets != undefined){
+    console.log(result.assets[0])
+
+    const formData = new FormData();
+    formData.append('file', {
+      uri: result.assets[0].uri,
+      type: result.assets[0].type, // adjust the type according to your image format
+      name: result.assets[0].fileName, // you can adjust the filename as well
+    });
+
+    try {
+      const response = await fetch('http://10.0.2.2:5000/upload', {
+        method: 'POST',
+        body: formData,
+        headers: {
+          'Content-Type': 'multipart/form-data',
+        },
+      });
+      const data = await response.json();
+      console.log(data);
+    } catch (error) {
+      console.error('Error:', error);
+    }
+  }
+  
 }
 
 const SplitScreen = () => {
     const [data, setData] = useState([])
     useEffect(()=> {
         // console.log("yes")
-        fetch("http://10.0.2.2:5000/member").then(
+        fetch("http://10.0.2.2:5000/output", {method: 'GET'}).then(
           res => res.json()
         ).then(
             x => {
@@ -32,21 +71,38 @@ const SplitScreen = () => {
             }
         ).catch(error => console.log(error))
     }, [])
-    // useEffect
-    // useEffect
+
     console.log(data)
+
   return(
     <View>
-      <Button
-        onPress={
-            
-            () => console.log(data)
-        }
-        title="Learn More"
-        color="#841584"
-        accessibilityLabel="Learn more about this purple button"
-      />
-    </View>
+      <View style={{margin:20}}>
+        <TouchableOpacity style={{
+            backgroundColor:"#DCE1F0",
+            width:150,
+            height:60,
+            borderRadius:5,
+            alignContent:'center',
+            justifyContent:'center'
+          }} onPress={() => console.log(data)}>
+            <Text style={{alignSelf:'center'}}>Get Data</Text>
+          </TouchableOpacity>
+      </View>
+        <View style={{margin:20}}>
+          <TouchableOpacity style={{
+            backgroundColor:"#DCE1F0",
+            width:150,
+            height:60,
+            borderRadius:5,
+            alignContent:'center',
+            justifyContent:'center'
+          }} onPress={AcessGallery}>
+            <Text style={{alignSelf:'center'}}>Upload File</Text>
+          </TouchableOpacity>
+        </View>
+      </View>
+      
+      
   )
 };
 
