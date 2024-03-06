@@ -14,7 +14,7 @@ import AntDesign from 'react-native-vector-icons/AntDesign'
 import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons'
 
 
-export default function Example() {
+export default function Example({navigation}: {navigation: any}) {
   const [form, setForm] = useState({
     darkMode: false
   });
@@ -188,7 +188,7 @@ export default function Example() {
           <View style={styles.sectionSignOut}>
             <TouchableOpacity
               onPress={() => {
-                // handle onPress
+                navigation.navigate("Login")
               }}
               style={styles.signout}>
 
@@ -196,9 +196,7 @@ export default function Example() {
             </TouchableOpacity>
 
             <TouchableOpacity
-              onPress={() => {
-                // handle onPress
-              }}
+              onPress={() => navigation.navigate("Test")}
               style={styles.signout}>
 
               <Text style={styles.signoutLabel}>Delete Account</Text>
