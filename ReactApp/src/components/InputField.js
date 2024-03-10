@@ -1,5 +1,12 @@
 import React from 'react';
 import {View, Text, TouchableOpacity, TextInput} from 'react-native';
+import { colors } from '../config/theme';
+
+const theme = {
+  mode: "dark"
+}
+
+let ActiveColor = colors[theme.mode]
 
 export default function InputField({
   label,
@@ -34,7 +41,7 @@ export default function InputField({
         />
       )}
       <TouchableOpacity onPress={fieldButtonFunction}>
-        <Text style={{color: '#7B2FF8', fontWeight: '700'}}>{fieldButtonLabel}</Text>
+        <Text style={{color: ActiveColor.button , fontWeight: '700'}}>{fieldButtonLabel}</Text>
       </TouchableOpacity>
     </View>
   );

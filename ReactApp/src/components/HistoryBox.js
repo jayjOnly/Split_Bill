@@ -1,7 +1,35 @@
 import { StyleSheet, Text, View, TouchableOpacity} from 'react-native'
 import React from 'react'
+import { colors } from '../config/theme';
+import { ThemeContext } from '../context/ThemeContext';
+import { useContext } from 'react';
 
-const ActivityBoz = () => {
+const ActivityBox = () => {
+  const {theme} = useContext(ThemeContext);
+  let ActiveColor = colors[theme.mode]
+
+  const styles = StyleSheet.create({
+    box:{
+      flex:1,
+      backgroundColor: ActiveColor.background ,
+      borderRadius:20,
+      justifyContent:'center',
+      marginBottom:20,
+      padding:15
+    },
+    text:{
+      marginBottom:5,
+      fontFamily:'Montserrat-Light',
+      color: ActiveColor.text
+    },
+    harga:{
+      marginBottom:10,
+      fontSize:25,
+      fontFamily:'Montserrat-Regular',
+      color: ActiveColor.text
+    },
+  })
+
   return (
     <View>
       <TouchableOpacity>
@@ -14,26 +42,4 @@ const ActivityBoz = () => {
   )
 }
 
-export default ActivityBoz
-
-const styles = StyleSheet.create({
-  box:{
-    flex:1,
-    backgroundColor:'#FFFFFF',
-    borderRadius:20,
-    justifyContent:'center',
-    marginBottom:20,
-    padding:15
-  },
-  text:{
-    marginBottom:5,
-    fontFamily:'Montserrat-Regular',
-    color:'#6C757D'
-  },
-  harga:{
-    marginBottom:10,
-    fontSize:25,
-    fontFamily:'Montserrat-Regular',
-    color:'#000000'
-  },
-})
+export default ActivityBox

@@ -2,18 +2,15 @@ import React from 'react';
 import { StyleSheet,Text, Button, View, ImageComponent, Image, Pressable } from 'react-native';
 import { useNavigation } from '@react-navigation/native';
 import Ionicons from 'react-native-vector-icons/Ionicons'
+import { colors } from '../config/theme';
+import { ThemeContext } from '../context/ThemeContext';
+import { useContext } from 'react';
 
 const MainHeader = ({title, navi}) => {
-  return (
-    <View style={[styles.cointainer]}>
-      <Text style={styles.title}>Welcome {title}!</Text>
-      <Ionicons name='notifications' size={25} onPress={navi} color='#0F0F0F'/>
-    </View>
-    
-  );
-};
+  const {theme} = useContext(ThemeContext);
+  let ActiveColor = colors[theme.mode]
 
-const styles = StyleSheet.create({
+  const styles = StyleSheet.create({
     cointainer:{
       flexDirection:'row',
       justifyContent:'space-between',
@@ -23,9 +20,21 @@ const styles = StyleSheet.create({
     },
     title:{
         fontSize:18,
-        color:'#0F0F0F',
+        color: ActiveColor.text,
         fontFamily:'Montserrat-Regular'
+    },
+    icon:{
+      color: ActiveColor.icon
     }
-})
+  })
+
+  return (
+    <View style={[styles.cointainer]}>
+      <Text style={styles.title}>Welcome {title}!</Text>
+      <Ionicons name='notifications' size={25} onPress={navi} style={styles.icon}/>
+    </View>
+    
+  );
+};
 
 export default MainHeader

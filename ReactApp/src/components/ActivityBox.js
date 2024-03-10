@@ -1,7 +1,47 @@
 import { StyleSheet, Text, View, TouchableOpacity} from 'react-native'
 import React from 'react'
+import { colors } from '../config/theme'
+import { ThemeContext } from '../context/ThemeContext';
+import { useContext } from 'react';
 
-const ActivityBoz = ({navi}) => {
+const ActivityBox = ({navi}) => {
+  const {theme} = useContext(ThemeContext);
+  let ActiveColor = colors[theme.mode];
+
+  const styles = StyleSheet.create({
+    box:{
+      flex:1,
+      backgroundColor: ActiveColor.background,
+      borderRadius:20,
+      justifyContent:'center',
+      marginBottom:20,
+      padding:15
+    },
+    text:{
+      marginBottom:5,
+      fontFamily:'Montserrat-Light',
+      color: ActiveColor.text
+    },
+    harga:{
+      marginBottom:20,
+      fontSize:25,
+      fontFamily:'Montserrat-Regular',
+      color: ActiveColor.label
+    },
+    ButtonLabel:{
+      fontSize: 17,
+      color: ActiveColor.intext,
+      fontFamily:'Montserrat-Regular',
+      margin:7,
+      padding:2
+    },
+    Button:{
+      alignItems: 'center',
+      backgroundColor: ActiveColor.button,
+      borderRadius:15
+    }
+  })
+
   return (
     <View>
       <View style={styles.box}>
@@ -18,38 +58,4 @@ const ActivityBoz = ({navi}) => {
   )
 }
 
-export default ActivityBoz
-
-const styles = StyleSheet.create({
-  box:{
-    flex:1,
-    backgroundColor:'#FFFFFF',
-    borderRadius:20,
-    justifyContent:'center',
-    marginBottom:20,
-    padding:15
-  },
-  text:{
-    marginBottom:5,
-    fontFamily:'Montserrat-Regular',
-    color:'#6C757D'
-  },
-  harga:{
-    marginBottom:20,
-    fontSize:25,
-    fontFamily:'Montserrat-Regular',
-    color:'#000000'
-  },
-  ButtonLabel:{
-    fontSize: 17,
-    color: '#FFFFFF',
-    fontFamily:'Montserrat-Regular',
-    margin:7,
-    padding:2
-  },
-  Button:{
-    alignItems: 'center',
-    backgroundColor: '#007AFF',
-    borderRadius:15
-  }
-})
+export default ActivityBox

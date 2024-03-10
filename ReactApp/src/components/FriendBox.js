@@ -1,8 +1,45 @@
 import { StyleSheet, Text, View, TouchableOpacity, Image, Alert} from 'react-native'
 import React from 'react'
 import MaterialIcons from 'react-native-vector-icons/MaterialIcons'
+import { colors } from '../config/theme';
+import { ThemeContext } from '../context/ThemeContext';
+import { useContext } from 'react';
 
 const FriendBox = () => {
+  const {theme} = useContext(ThemeContext);
+  let ActiveColor = colors[theme.mode]
+
+  const styles = StyleSheet.create({
+    box:{
+      backgroundColor:ActiveColor.background,
+      borderRadius:20,
+      marginBottom:20,
+      padding:15,
+      flexDirection:'row',
+      alignItems:'center',
+      flex:1
+    },
+    text:{
+      marginBottom:5,
+      fontFamily:'Montserrat-Regular',
+      color:ActiveColor.text,
+      fontSize:15
+    },  
+    profileAvatarWrapper: {
+      position: 'relative',
+    },
+    profileAvatar: {
+      width: 50,
+      height: 50,
+      borderRadius: 9999,
+      marginRight:20
+    },
+    icon:{
+      marginRight:4,
+      color: ActiveColor.icon
+    }
+  })
+
   return (
     <View>
       <TouchableOpacity>
@@ -22,7 +59,7 @@ const FriendBox = () => {
             <TouchableOpacity 
               onPress={() => Alert.alert("Reminder have been sent")}
               style={styles.icon}>
-              <MaterialIcons name='notifications-active' size={30} />
+              <MaterialIcons name='notifications-active' size={30} style={styles.icon}/>
             </TouchableOpacity>
         </View>
       </TouchableOpacity>
@@ -31,33 +68,3 @@ const FriendBox = () => {
 }
 
 export default FriendBox
-
-const styles = StyleSheet.create({
-  box:{
-    backgroundColor:'#FFFFFF',
-    borderRadius:20,
-    marginBottom:20,
-    padding:15,
-    flexDirection:'row',
-    alignItems:'center',
-    flex:1
-  },
-  text:{
-    marginBottom:5,
-    fontFamily:'Montserrat-Regular',
-    color:'#6C757D',
-    fontSize:15
-  },  
-  profileAvatarWrapper: {
-    position: 'relative',
-  },
-  profileAvatar: {
-    width: 50,
-    height: 50,
-    borderRadius: 9999,
-    marginRight:20
-  },
-  icon:{
-    marginRight:8
-  }
-})
