@@ -45,7 +45,8 @@ const ActivityBox = ({navi}) => {
   return (
     <View>
       <View style={styles.box}>
-        <Text style={styles.text}>Judul | DD-MM-YY</Text>
+        <Text style={styles.text}>Name | DD-MM-YY</Text>
+        {/* <Text style={styles.text}>Activity</Text> */}
         <Text style={styles.harga}>Rp. 100.000</Text>
         <TouchableOpacity
             onPress={navi}

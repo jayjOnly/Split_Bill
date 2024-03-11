@@ -40,12 +40,15 @@ const HistoryScreen = ({navigation}) => {
         <Text style={styles.header}>History</Text>
         <ScrollView>
           <View style={styles.activity}>
-            <HistoryBox navi={() => navigation.navigate("Details")}/>
-            <HistoryBox navi={() => navigation.navigate("Details")}/>
-            <HistoryBox navi={() => navigation.navigate("Details")}/>
-            <HistoryBox navi={() => navigation.navigate("Details")}/>
-            <HistoryBox navi={() => navigation.navigate("Details")}/>
-            <HistoryBox navi={() => navigation.navigate("Details")}/>
+            <HistoryBox navi={() => navigation.navigate("HistoryDetails")}/>
+            <HistoryBox navi={() => navigation.navigate("HistoryDetails")}/>
+            <HistoryBox navi={() => navigation.navigate("HistoryDetails")}/>
+            <HistoryBox navi={() => navigation.navigate("HistoryDetails")}/>
+            <HistoryBox navi={() => navigation.navigate("HistoryDetails")}/>
+            <HistoryBox navi={() => navigation.navigate("HistoryDetails")}/>
+            <HistoryBox navi={() => navigation.navigate("HistoryDetails")}/>
+            <HistoryBox navi={() => navigation.navigate("HistoryDetails")}/>
+            <HistoryBox navi={() => navigation.navigate("HistoryDetails")}/>
           </View>
         </ScrollView>
       </View>

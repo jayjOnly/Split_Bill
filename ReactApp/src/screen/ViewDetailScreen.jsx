@@ -12,65 +12,85 @@ const ViewDetailScreen = ({navigation}) => {
   const styles = StyleSheet.create({
     screen:{
       flexDirection:'row',
-      justifyContent:'center',
+      justifyContent:'flex-start',
       backgroundColor: ActiveColor.background,
       paddingBottom:18
     },
     user:{
-      flexDirection:'row',
-      marginTop:10
+      alignItems:'center'
     },
     BackButton:{
       marginLeft:15,
       marginTop:20,
       color: ActiveColor.icon
     },
-    title:{
-      textAlign:'center',
-      flex:1,
-      marginTop:20,
-      fontSize:18,
-      fontWeight:'700',
-      marginRight:15,
-      color: ActiveColor.text
+    harga:{
+      color: ActiveColor.text,
+      fontSize:25,
+      fontFamily:'Montserrat-Bold',
+      marginTop:30
     },
-    text:{
-      marginBottom:5,
-      fontFamily:'Montserrat-Light',
-      fontSize:20,
-      color: ActiveColor.text
-    },
-    text2:{
-      marginBottom:8,
-      fontSize:22,
-      fontFamily:'Montserrat-Regular',
-      color: ActiveColor.label
-    },
-    text3:{
-      alignSelf: "center",
+    des:{
+      color: ActiveColor.text,
       fontSize:17,
       fontFamily:'Montserrat-Regular',
-      color: ActiveColor.label
-    },
-    text4:{
-      alignSelf: "center",
-      fontSize:17,
-      fontFamily:'Montserrat-Regular',
-      marginLeft:80,
-      color: ActiveColor.label
+      marginTop:8
     },
     profileAvatar: {
-      width: 50,
-      height: 50,
+      width: 80,
+      height: 80,
       borderRadius: 9999,
+    },
+    signout: {
+      marginTop:15,
+      alignItems: 'center',
+      alignSelf:"center",
+      height: 40,
+      width:360,
+      backgroundColor: ActiveColor.button,
+      borderRadius: 15,
+      marginBottom: 12,
+    },
+    signoutLabel:{
+      fontSize: 17,
+      color: '#FFFFFF',
+      fontFamily:'Montserrat-Regular',
+      margin:7
+    },
+    box:{
+      backgroundColor: ActiveColor.box,
+      marginTop:30,
+      borderRadius:20,
+      marginHorizontal:15,
+      paddingLeft:20,
+      paddingBottom:20
+    },
+    text:{
+      alignSelf: "center",
+      fontSize:17,
+      fontFamily:'Montserrat-Regular',
+      color: ActiveColor.label,
+      marginTop:15,
+      marginRight:40,
+      marginLeft:20
+    },
+    line:{
+      marginTop:15,
+      marginLeft:3,
+      marginRight:15,
+      flexDirection:"row", 
+      height: 1.5, 
+      backgroundColor: ActiveColor.text
     },
     row: {
       flexDirection: 'row',
       marginBottom: 5,
+      marginTop:10
     },
     label: {
       width: 120, 
-      marginRight: 180,
+      marginRight: 110,
+      marginLeft:17,
       fontSize:17,
       fontFamily:'Montserrat-Regular',
       color: ActiveColor.label,
@@ -80,32 +100,10 @@ const ViewDetailScreen = ({navigation}) => {
       fontFamily:'Montserrat-Regular',
       color: ActiveColor.label,
     },
-    line:{
-      margin:15, flexDirection:"row", 
-      height: 1.5, 
-      backgroundColor: '#000000'
-    },
-    signout: {
-      marginTop:10,
-      alignItems: 'center',
-      alignSelf:"center",
-      height: 40,
-      width:370,
-      backgroundColor: '#E71919',
-      borderRadius: 8,
-      marginBottom: 12,
-    },
-    signoutLabel:{
-      fontSize: 17,
-      color: '#FFFFFF',
-      fontWeight: 'bold',
-      margin:7
-    },
   })
 
   return (
-    <View style={{flex:1, backgroundColor: ActiveColor.background2}}>
-
+    <View style={{flex:1, backgroundColor: ActiveColor.background}}>
       <View style={styles.screen}>
         <TouchableOpacity>
           <AntDesign 
@@ -114,100 +112,50 @@ const ViewDetailScreen = ({navigation}) => {
               size={25} 
               style={styles.BackButton}/>
         </TouchableOpacity>
-
-        <Text style={styles.title}>Details</Text>
       </View>
-
-      <View style={{marginTop:30}}>
-        <View style={{marginLeft:30}}>
-          <Text style={styles.text2}>Judul | DD-MM-YY</Text>
-          <Text style={styles.text2}>Total Bill = Rp. 2.000.000</Text>
-        </View>
-
-        <View style={{marginLeft:40, marginTop:30}}>
-          <Text style={styles.text2}>Details</Text>
-        </View>
-
-
-          
-        <View style={{marginLeft:40}}>
-         <View style={styles.user}>
-            <Image
-                alt=""
-                source={{
-                  uri: 'https://images.unsplash.com/photo-1633332755192-727a05c4013d?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=facearea&facepad=2.5&w=256&h=256&q=80',
-                }}
-                style={styles.profileAvatar} />
-            <View style={{marginLeft:20}}>
-              <Text style={{fontSize:15, fontFamily:'Montserrat-Regular', color: ActiveColor.label}}>Osama</Text>
-              <Text style={{fontSize:20, fontFamily:'Montserrat-Regular', color: ActiveColor.label}}>Rp. 911.000</Text>
-            </View>
-          </View>
-
-          <View style={{flexDirection:'row', marginTop:18, alignItems:"center"}}>
-            <Text style={styles.text3}>Benda</Text>
-            <Text style={styles.text4}>x1</Text>
-            <Text style={styles.text4}>Rp. 900.000</Text>
-          </View>
-          <View style={{flexDirection:'row', marginTop:2, alignItems:"center"}}>
-            <Text style={styles.text3}>Benda</Text>
-            <Text style={styles.text4}>x1</Text>
-            <Text style={styles.text4}>Rp. 11.000</Text>
-          </View>
-        </View>
       
-        <View style={styles.line} />
+      <View style={styles.user}>
+        <Image
+          alt=""
+          source={{
+          uri: 'https://images.unsplash.com/photo-1633332755192-727a05c4013d?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=facearea&facepad=2.5&w=256&h=256&q=80',
+          }}
+          style={styles.profileAvatar} />
 
-        <View style={{marginLeft:40}}>
-          <View style={styles.user}>
-            <Image
-                alt=""
-                source={{
-                  uri: 'https://images.unsplash.com/photo-1633332755192-727a05c4013d?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=facearea&facepad=2.5&w=256&h=256&q=80',
-                }}
-                style={styles.profileAvatar} />
-            <View style={{marginLeft:20}}>
-              <Text style={{fontSize:15, fontFamily:'Montserrat-Regular', color: ActiveColor.label}}>Hitlah</Text>
-              <Text style={{fontSize:20, fontFamily:'Montserrat-Regular', color: ActiveColor.label}}>Rp. 1.099.000</Text>
-            </View>
-          </View>
+        <Text style={styles.harga}>Rp500.000</Text>
+        <Text style={styles.des}>Judul Aktivitas</Text>
+        <Text style={styles.des}>Day, DD Months YYYY</Text>
+      </View>
+      
 
-          <View style={{flexDirection:'row', marginTop:18, alignItems:"center"}}>
-            <Text style={styles.text3}>Benda</Text>
-            <Text style={styles.text4}>x1</Text>
-            <Text style={styles.text4}>Rp. 1.099.000</Text>
+      <View style={styles.box}>
+          <View style={{justifyContent:'center',flexDirection:'row'}}>
+            <Text style={styles.text}>Benda</Text>
+            <Text style={styles.text}>x1</Text>
+            <Text style={styles.text}>Rp. 1.099.000</Text>
           </View>
-        </View>
-
-        <View style={styles.line} />  
-
-        <View style={{marginLeft:40}}>
-          <View style={styles.row}>
-            <Text style={styles.label}>Tax</Text>
-            <Text style={styles.value}>0</Text>
-          </View>
-          <View style={styles.row}>
-            <Text style={styles.label}>Service Fee</Text>
-            <Text style={styles.value}>0</Text>
-          </View>
-          <View style={styles.row}>
-            <Text style={styles.label}>Discount</Text>
-            <Text style={styles.value}>0</Text>
-          </View>
-          <View style={styles.row}>
-            <Text style={styles.label}>Others</Text>
-            <Text style={styles.value}>0</Text>
-          </View>  
-        </View>
           
-        <View style={styles.line} />
+          <View style={{justifyContent:'center',flexDirection:'row'}}>
+            <Text style={styles.text}>Benda</Text>
+            <Text style={styles.text}>x1</Text>
+            <Text style={styles.text}>Rp. 1.099.000</Text>
+          </View>
+          
+          <View style={styles.line} />
+          
+          <View style={styles.row}>
+            <Text style={styles.label}>Total</Text>
+            <Text style={styles.value}>Rp0</Text>
+          </View>
+
+      </View>
+      
         <TouchableOpacity
               onPress={() => navigation.navigate("BottomTab")}
               style={styles.signout}>
 
-              <Text style={styles.signoutLabel}>Send Details</Text>
+              <Text style={styles.signoutLabel}>Lihat Bukti Pembayaran</Text>
         </TouchableOpacity>
-      </View>
     </View>
   )
 }
