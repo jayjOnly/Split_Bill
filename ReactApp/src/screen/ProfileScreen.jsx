@@ -189,7 +189,7 @@ export default function Example({navigation}) {
 
             <TouchableOpacity
               onPress={() => {
-                // handle onPress
+                navigation.navigate("AccountSetting")
               }}
               style={styles.row}>
               <View style={[styles.rowIcon, { backgroundColor: '#fe9400' }]}>

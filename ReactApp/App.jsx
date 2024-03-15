@@ -13,6 +13,8 @@ import { ThemeContext } from './src/context/ThemeContext'
 import HomeScreen from './src/screen/HomeScreen'
 import ViewHistoryDetailScreen from './src/screen/ViewHistoryDetailScreen'
 import TermsNConditionScreen from './src/screen/TermsNCondScreen'
+import AccountSettingScreen from './src/screen/AccountSettingScreen'
+
 
 const Stack = createNativeStackNavigator();
 
@@ -42,6 +44,7 @@ const App = () => {
           <Stack.Screen name='Details' component={ViewDetailScreen}/>
           <Stack.Screen name='HistoryDetails' component={ViewHistoryDetailScreen}/>
           <Stack.Screen name='TOS' component={TermsNConditionScreen}/>
+          <Stack.Screen name='AccountSetting' component={AccountSettingScreen}/>
         </Stack.Navigator>
       </NavigationContainer>
     </ThemeContext.Provider>
