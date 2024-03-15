@@ -12,6 +12,7 @@ import TestScreen from './src/screen/Test'
 import { ThemeContext } from './src/context/ThemeContext'
 import HomeScreen from './src/screen/HomeScreen'
 import ViewHistoryDetailScreen from './src/screen/ViewHistoryDetailScreen'
+import TermsNConditionScreen from './src/screen/TermsNCondScreen'
 
 const Stack = createNativeStackNavigator();
 
@@ -40,6 +41,7 @@ const App = () => {
           <Stack.Screen name='Notification' component={NotificationScreen}/>
           <Stack.Screen name='Details' component={ViewDetailScreen}/>
           <Stack.Screen name='HistoryDetails' component={ViewHistoryDetailScreen}/>
+          <Stack.Screen name='TOS' component={TermsNConditionScreen}/>
         </Stack.Navigator>
       </NavigationContainer>
     </ThemeContext.Provider>

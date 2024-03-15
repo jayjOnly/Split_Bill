@@ -274,7 +274,7 @@ export default function Example({navigation}) {
 
             <TouchableOpacity
               onPress={() => {
-                // handle onPress
+                navigation.navigate("TOS")
               }}
               style={styles.row}>
               <View style={[styles.rowIcon, { backgroundColor: '#8e8d91' }]}>

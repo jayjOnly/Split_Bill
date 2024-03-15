@@ -17,8 +17,7 @@ const TermsNConditionScreen = ({ navigation }) => {
       flexDirection: 'row',
       justifyContent: 'center',
       backgroundColor: ActiveColor.background,
-      paddingBottom: 18,
-      marginTop: 20,
+      paddingBottom: 18
     },
     backButton: {
       marginLeft: 15,
