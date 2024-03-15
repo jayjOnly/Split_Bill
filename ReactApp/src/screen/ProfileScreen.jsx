@@ -281,7 +281,7 @@ export default function Example({navigation}) {
                 <FeatherIcon color="#fff" name="flag" size={20} />
               </View>
 
-              <Text style={styles.rowLabel}>Term & Conditions</Text>
+              <Text style={styles.rowLabel}>Terms & Conditions</Text>
 
               <View style={styles.rowSpacer} />
 
