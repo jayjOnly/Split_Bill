@@ -4,6 +4,7 @@ import {launchCamera, launchImageLibrary} from 'react-native-image-picker';
 import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons'
 import Modal from "react-native-modal";
 import { useIsFocused } from '@react-navigation/native';
+import { User } from '../components/OOP';
 
 
 const uploadImage = async (imageUri, imageType, imageName) => {
@@ -59,18 +60,21 @@ const AcessGallery = async () => {
 }
 
 const SplitScreen = () => {
-    const [data, setData] = useState([])
-    useEffect(()=> {
-        fetch("http://10.0.2.2:5000/output", {method: 'GET'}).then(
-          res => res.json()
-        ).then(
-            x => {
-            setData(x)
-            }
-        ).catch(error => console.log(error))
-    }, [])
+  const user1 = new User("user001", "Jacky", 19, "male", "jackydummy@gmail.com", "JackyTheGreat", "nandoanjing")
+  console.log(user1)
+ 
+  const [data, setData] = useState([])
+  useEffect(()=> {
+      fetch("http://10.0.2.2:5000/output", {method: 'GET'}).then(
+        res => res.json()
+      ).then(
+          x => {
+          setData(x)
+          }
+      ).catch(error => console.log(error))
+  }, [])
 
-    console.log(data)
+  console.log(data)
 
   return(
     <View>
