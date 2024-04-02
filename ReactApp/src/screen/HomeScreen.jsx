@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import { StyleSheet,Text, Button, View, ScrollView, SafeAreaView, StatusBar} from 'react-native';
 import { useNavigation } from '@react-navigation/native';
 import MainHeader from '../components/MainHeader';
@@ -18,7 +18,8 @@ const HomeScreen = ({navigation}) => {
   const styles = StyleSheet.create({
     container:{
       backgroundColor: ActiveColor.background,
-      paddingBottom:40
+      paddingBottom:40,
+      flex:1
     },
     title:{
       fontSize:20,
@@ -35,6 +36,16 @@ const HomeScreen = ({navigation}) => {
     }
   })
 
+  const [data, setData] = useState([])
+
+  useEffect(() => {
+    fetch('http://192.168.163.60:8080/activityhistory') //ganti IPnya sama kek IP PC anda
+    .then(res => res.json())
+    .then(data => setData(data))
+    .catch(err => console.log(err))
+  }, [])
+
+
   return (
     <SafeAreaView style={{flex:1}}>
       {/* <StatusBar backgroundColor={'#FFFFFF'} /> */}
@@ -47,12 +58,12 @@ const HomeScreen = ({navigation}) => {
           <View style={styles.activity}>
             <Text style={styles.title}>Activity</Text>
 
-            <ActivityBox navi={() => navigation.navigate("Details")}/>
-            <ActivityBox navi={() => navigation.navigate("Details")} />
-            <ActivityBox navi={() => navigation.navigate("Details")}/>
-            <ActivityBox navi={() => navigation.navigate("Details")}/>
-            <ActivityBox navi={() => navigation.navigate("Details")}/>
-            <ActivityBox navi={() => navigation.navigate("Details")}/>
+            <View>
+            {data.map((d,i) =>
+              <ActivityBox key={i} navi={() => navigation.navigate("Details")} name={d.Nama} nominal={d.Nominal} date={d.Tanggal}/>
+            )}
+            </View>
+
           </View>
         </ScrollView>
       </View>

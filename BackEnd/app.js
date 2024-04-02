@@ -14,17 +14,11 @@ const db = mysql.createConnection({
 
 
 app.get('/activityhistory', (req, res) =>{
-    const sql = "SELECT * FROM `activityhistory`";
+    const sql = "SELECT * FROM activityhistory";
     db.query(sql, (err, data) => {
-        if(err) return{
-            error: res.json(err),
-            status: res.sendStatus(400)
-        } 
-        return{
-            data: res.json(data),   
-            status: res.sendStatus(200)
-        } 
-
+        if(err) return res.json(err);
+        return res.json(data);
+        res.sendStatus(200);
     })
 })
 
