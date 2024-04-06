@@ -1,15 +1,14 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import {
   SafeAreaView,
   View,
   Text,
   TextInput,
   TouchableOpacity,
-  StyleSheet
+  StyleSheet,
 } from 'react-native';
 
 
-import InputField from '../components/InputField'
 import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons'
 import { useNavigation } from '@react-navigation/native';
 import { ThemeContext } from '../context/ThemeContext';
@@ -21,10 +20,36 @@ import { colors } from '../config/theme';
 // import FacebookSVG from '../assets/images/facebook.svg';
 // import TwitterSVG from '../assets/images/twitter.svg';
 
+
+
 const LoginScreen = ({navigation}) => {
   const {theme} = useContext(ThemeContext);
+  const [email, setEmail] = useState();
+  const [password, setPassword] = useState();
   let ActiveColor = colors[theme.mode]
 
+  const handleLogin = () => {
+    // Make a POST request to your backend server
+    fetch('http://192.168.69.1:5555/usertable', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify({ email, password })
+    })
+    .then(response => {
+      // console.log(response)
+      if (response.ok) {
+        console.log('Login successful');
+        navigation.navigate("BottomTab");
+       
+      } else {
+        console.log('Login failed');
+      }
+    })
+    .catch(error => console.error('Error:', error));
+  };
+  
   return (
     <SafeAreaView style={{flex: 1, justifyContent: 'center',backgroundColor: ActiveColor.background }}>
        <SafeAreaView style={{flex: 1, justifyContent: 'center'}}>
@@ -47,47 +72,72 @@ const LoginScreen = ({navigation}) => {
           }}>
           Login
         </Text>
-
-        <InputField
-          label={'Email ID'}
-          icon={
-            <MaterialCommunityIcons name='at' size={20} color={ActiveColor.iconOnClick} style={{marginRight: 5}} />    
-          }
-          inputType={'any'}
-          keyboardType="email-address"
-          fieldButtonLabel={''}
-          fieldButtonFunction={'any'}
-        />
-
-      <InputField
-          label={'Password'}
-          icon={
-            <MaterialCommunityIcons name='lock-outline' size={20} color={ActiveColor.iconOnClick} style={{marginRight: 5}} />
-          }
-          inputType="password"
-          keyboardType={'ascii-capable'}
-          fieldButtonLabel={"Forgot?"}
-          fieldButtonFunction={() => {}}
-        />
         
+        <View
+          style={{
+            flexDirection: 'row',
+            borderBottomColor: '#ccc',
+            borderBottomWidth: 1,
+            paddingBottom: 8,
+            marginBottom: 25,
+          }}>
+          <MaterialCommunityIcons name='at' size={20} color={ActiveColor.iconOnClick} style={{marginRight: 5}} />    
+          <TextInput
+            placeholder={'Email ID'}
+            keyboardType={"email-address"}
+            style={{flex: 1, paddingVertical: 0, color:"white", color: ActiveColor.text}}
+            onChangeText={x=>setEmail(x)}
+          />
+         
+          <TouchableOpacity onPress={()=>{}}>
+            <Text style={{color: ActiveColor.button , fontWeight: '700'}}></Text>
+          </TouchableOpacity>
+        </View>
+        
+        <View
+          style={{
+            flexDirection: 'row',
+            borderBottomColor: '#ccc',
+            borderBottomWidth: 1,
+            paddingBottom: 8,
+            marginBottom: 25,
+          }}>
+          <MaterialCommunityIcons name='lock-outline' size={20} color={ActiveColor.iconOnClick} style={{marginRight: 5}} />
+          <TextInput
+            placeholder={'Password'}
+            keyboardType={'ascii-capable'}
+            style={{flex: 1, paddingVertical: 0, color:"white", color: ActiveColor.text}}
+            secureTextEntry={true}
+            onChangeText={x=>setPassword(x)}
+        />
+
+          <TouchableOpacity onPress={()=>{}}>
+            <Text style={{color: ActiveColor.button , fontWeight: '700'}}>Forgot?</Text>
+          </TouchableOpacity>
+        </View>
+     
         <TouchableOpacity
-      onPress={()=> navigation.navigate("BottomTab")}
-      style={{
-        backgroundColor: ActiveColor.button,
-        padding: 20,
-        borderRadius: 10,
-        marginBottom: 30,
-      }}>
-      <Text
-        style={{
-          textAlign: 'center',
-          fontWeight: '700',
-          fontSize: 16,
-          color: ActiveColor.intext,
-        }}>
-        Login
-      </Text>
-    </TouchableOpacity>
+          onPress={() => {
+            console.log(email, password);
+            handleLogin();
+            
+          }}
+          style={{
+            backgroundColor: ActiveColor.button,
+            padding: 20,
+            borderRadius: 10,
+            marginBottom: 30,
+          }}>
+          <Text
+            style={{
+              textAlign: 'center',
+              fontWeight: '700',
+              fontSize: 16,
+              color: ActiveColor.intext,
+            }}>
+            Login
+          </Text>
+        </TouchableOpacity>
 
         {/* <Text style={{textAlign: 'center', color: '#666', marginBottom: 30}}>
           Or, login with ...
