@@ -12,6 +12,7 @@ export default function InputField({
   keyboardType,
   fieldButtonLabel,
   fieldButtonFunction,
+  inputFunction,
   
 }) {
   const {theme} = useContext(ThemeContext);
@@ -33,6 +34,7 @@ export default function InputField({
           keyboardType={keyboardType}
           style={{flex: 1, paddingVertical: 0, color:"white", color: ActiveColor.text}}
           secureTextEntry={true}
+          onChangeText={inputFunction}
         />
       ) : (
         <TextInput

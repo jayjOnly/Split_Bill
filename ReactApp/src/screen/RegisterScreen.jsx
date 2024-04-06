@@ -10,19 +10,42 @@ import {
 } from 'react-native';
 
 import DatePicker from 'react-native-date-picker';
-import InputField from '../components/InputField';
 import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons'
 import { colors } from '../config/theme';
 import { ThemeContext } from '../context/ThemeContext';
 
 const RegisterScreen = ({navigation}) => {
   // console.log(props)
-  const [date, setDate] = useState(new Date());
-  const [open, setOpen] = useState(false);
-  const [dobLabel, setDobLabel] = useState('Date of Birth');
+  // const [date, setDate] = useState(new Date());
+  // const [open, setOpen] = useState(false);
+  // const [dobLabel, setDobLabel] = useState('Date of Birth');
+
+  const [email, setEmail] = useState();
+  const [password, setPassword] = useState();
+  const [username, setName] = useState();
+  const [cpassword, setCPassword] = useState();
 
   const {theme} = useContext(ThemeContext);
   let ActiveColor = colors[theme.mode]
+
+  const handleRegister = () => {
+    fetch('http://192.168.69.1:2525/usertable', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify({ username, email, password })
+    })
+    .then(response => {
+      if (response.ok) {
+        console.log('Registration successful');
+        navigation.navigate("Login")
+      } else {
+        console.log('Registration failed');
+      }
+    })
+    .catch(error => console.error('Error:', error));
+  };
 
   return (
     <SafeAreaView style={{flex: 1, justifyContent: 'center', backgroundColor: ActiveColor.background}}>
@@ -87,51 +110,91 @@ const RegisterScreen = ({navigation}) => {
           Or, register with email ...
         </Text> */}
 
-        <InputField
-          label={'Full Name'}
-          icon={
-            <MaterialCommunityIcons name='account-outline' size={20} color={ActiveColor.iconOnClick} style={{marginRight: 5}} />    
-          }
-          inputType={'name'}
-          keyboardType={'ascii-capable'}
-          fieldButtonLabel={''}
-          fieldButtonFunction={'any'}
+        <View
+          style={{
+            flexDirection: 'row',
+            borderBottomColor: '#ccc',
+            borderBottomWidth: 1,
+            paddingBottom: 8,
+            marginBottom: 25,
+          }}>
+          <MaterialCommunityIcons name='account-outline' size={20} color={ActiveColor.iconOnClick} style={{marginRight: 5}} />    
+          <TextInput
+            placeholder={'Full Name'}
+            keyboardType={"ascii-capable"}
+            style={{flex: 1, paddingVertical: 0, color:"white", color: ActiveColor.text}}
+            onChangeText={x=>setName(x)}
+          />
+         
+          <TouchableOpacity onPress={()=>{}}>
+            <Text style={{color: ActiveColor.button , fontWeight: '700'}}></Text>
+          </TouchableOpacity>
+        </View>
+
+        <View
+          style={{
+            flexDirection: 'row',
+            borderBottomColor: '#ccc',
+            borderBottomWidth: 1,
+            paddingBottom: 8,
+            marginBottom: 25,
+          }}>
+          <MaterialCommunityIcons name='at' size={20} color={ActiveColor.iconOnClick} style={{marginRight: 5}} />    
+          <TextInput
+            placeholder={'Email ID'}
+            keyboardType={"email-address"}
+            style={{flex: 1, paddingVertical: 0, color:"white", color: ActiveColor.text}}
+            onChangeText={x=>setEmail(x)}
+          />
+         
+          <TouchableOpacity onPress={()=>{}}>
+            <Text style={{color: ActiveColor.button , fontWeight: '700'}}></Text>
+          </TouchableOpacity>
+        </View>
+        
+        <View
+          style={{
+            flexDirection: 'row',
+            borderBottomColor: '#ccc',
+            borderBottomWidth: 1,
+            paddingBottom: 8,
+            marginBottom: 25,
+          }}>
+          <MaterialCommunityIcons name='lock-outline' size={20} color={ActiveColor.iconOnClick} style={{marginRight: 5}} />
+          <TextInput
+            placeholder={'Password'}
+            keyboardType={'ascii-capable'}
+            style={{flex: 1, paddingVertical: 0, color:"white", color: ActiveColor.text}}
+            secureTextEntry={true}
+            onChangeText={x=>setPassword(x)}
         />
+         
+          <TouchableOpacity onPress={()=>{}}>
+            <Text style={{color: ActiveColor.button , fontWeight: '700'}}></Text>
+          </TouchableOpacity>
+        </View>
 
-        <InputField
-          label={'Email ID'}
-          icon={
-            <MaterialCommunityIcons name='at' size={20} color={ActiveColor.iconOnClick} style={{marginRight: 5}} />    
-
-          }
-          inputType={'email'}
-          keyboardType={"email-address"}
-          fieldButtonLabel={''}
-          fieldButtonFunction={'any'}
+        <View
+          style={{
+            flexDirection: 'row',
+            borderBottomColor: '#ccc',
+            borderBottomWidth: 1,
+            paddingBottom: 8,
+            marginBottom: 25,
+          }}>
+          <MaterialCommunityIcons name='lock-check-outline' size={20} color={ActiveColor.iconOnClick} style={{marginRight: 5}} />         
+          <TextInput
+            placeholder={'Confirm Password'}
+            keyboardType={'ascii-capable'}
+            style={{flex: 1, paddingVertical: 0, color:"white", color: ActiveColor.text}}
+            secureTextEntry={true}
+            onChangeText={x=>setCPassword(x)}
         />
-
-        <InputField
-          label={'Password'}
-          icon={
-            <MaterialCommunityIcons name='lock-outline' size={20} color={ActiveColor.iconOnClick} style={{marginRight: 5}} />    
-          }
-          inputType="password"
-          keyboardType={'ascii-capable'}
-          fieldButtonLabel={''}
-          fieldButtonFunction={'any'}
-        />
-
-        <InputField
-          label={'Confirm Password'}
-          icon={
-            <MaterialCommunityIcons name='lock-check-outline' size={20} color={ActiveColor.iconOnClick} style={{marginRight: 5}} />    
-          }
-          inputType="password"
-          keyboardType={'ascii-capable'}
-          fieldButtonLabel={''}
-          fieldButtonFunction={'any'}
-        />
-
+         
+          <TouchableOpacity onPress={()=>{}}>
+            <Text style={{color: ActiveColor.button , fontWeight: '700'}}></Text>
+          </TouchableOpacity>
+        </View>
         {/* <View
           style={{
             flexDirection: 'row',
@@ -168,7 +231,14 @@ const RegisterScreen = ({navigation}) => {
         /> */}
 
         <TouchableOpacity
-          onPress={() => navigation.navigate("Login")}
+          onPress={() => {
+            console.log(username, email, password, cpassword);
+            if(cpassword == password){
+              handleRegister();
+            }else{
+              console.log("Wrong password confirmation")
+            }
+          }}
           style={{
             backgroundColor: ActiveColor.button,
             padding: 20,
