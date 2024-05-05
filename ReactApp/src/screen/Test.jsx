@@ -5,7 +5,9 @@ import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityI
 import Modal from "react-native-modal";
 import { useIsFocused } from '@react-navigation/native';
 import { User } from '../components/OOP';
+import axios from 'axios';
 
+global.Buffer = require('buffer').Buffer;
 
 const uploadImage = async (imageUri, imageType, imageName) => {
   const formData = new FormData();
@@ -59,6 +61,34 @@ const AcessGallery = async () => {
   
 }
 
+const performOCR = async () => {
+  const url = 'https://app.nanonets.com/api/v2/OCR/Model/c793292e-86cd-45ff-9545-58e487768d51/LabelFile/?async=false';
+
+  const result = await launchImageLibrary({mediaType: 'photo', quality: 1})
+  const formData = new FormData();
+  formData.append('file', {
+    uri: result.assets[0].uri,
+    type: result.assets[0].type, // adjust the type according to your image format
+    name: result.assets[0].fileName, // you can adjust the filename as well
+  });
+  console.log(result)
+
+  try {
+    const response = await fetch(url, {
+      method: 'POST',
+      body: formData,
+      headers: {
+        'Content-Type': 'multipart/form-data',
+        'Authorization' : 'Basic ' + Buffer.from('eeb6b933-0a11-11ef-a76e-da0c4b140285' + ':').toString('base64')
+      },
+    });
+    const data = await response.json();
+    console.log(data);
+  } catch (error) {
+    console.error('Error:', error);
+  }
+};
+
 const SplitScreen = () => {
   const user1 = new User("user001", "Jacky", 19, "male", "jackydummy@gmail.com", "JackyTheGreat", "nandoanjing")
   console.log(user1)
@@ -98,7 +128,7 @@ const SplitScreen = () => {
             borderRadius:5,
             alignContent:'center',
             justifyContent:'center'
-          }} onPress={AcessGallery}>
+          }} onPress={performOCR}>
             <Text style={{alignSelf:'center'}}>Upload File</Text>
           </TouchableOpacity>
         </View>

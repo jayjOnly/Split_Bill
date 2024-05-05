@@ -16,9 +16,11 @@ import { colors } from '../config/theme';
 import { ThemeContext } from '../context/ThemeContext';
 import { useContext } from 'react';
 
+global.Buffer = require('buffer').Buffer;
 
 const AccessCamera = async () => {
-  
+  const url = 'https://app.nanonets.com/api/v2/OCR/Model/c793292e-86cd-45ff-9545-58e487768d51/LabelFile/?async=false';
+
   const granted = await PermissionsAndroid.request(
     PermissionsAndroid.PERMISSIONS.CAMERA,
   )
@@ -30,7 +32,30 @@ const AccessCamera = async () => {
       }else if(res.errorCode){
         console.log(res.errorCode)
       }else{
-        console.log(res.assets)
+        const formData = new FormData();
+        formData.append('file', {
+          uri: res.assets[0].uri,
+          type: res.assets[0].type, // adjust the type according to your image format
+          name: res.assets[0].fileName, // you can adjust the filename as well
+        });
+        console.log(res)
+
+        try {
+          const response =  fetch(url, {
+            method: 'POST',
+            body: formData,
+            headers: {
+              'Content-Type': 'multipart/form-data',
+              'Authorization' : 'Basic ' + Buffer.from('eeb6b933-0a11-11ef-a76e-da0c4b140285' + ':').toString('base64')
+            },
+          });
+          
+          const data =  response.json();
+          console.log(data);
+
+        } catch (error) {
+          console.error('Error:', error);
+        }
       }
     })
   }else{
@@ -39,7 +64,36 @@ const AccessCamera = async () => {
 }
 
 const AcessGallery = async () => {
+  const url = 'https://app.nanonets.com/api/v2/OCR/Model/c793292e-86cd-45ff-9545-58e487768d51/LabelFile/?async=false';
+
   const result = await launchImageLibrary({mediaType: 'photo', quality: 1})
+  const formData = new FormData();
+  formData.append('file', {
+    uri: result.assets[0].uri,
+    type: result.assets[0].type, // adjust the type according to your image format
+    name: result.assets[0].fileName, // you can adjust the filename as well
+  });
+  console.log(result)
+
+  try {
+    const response = await fetch(url, {
+      method: 'POST',
+      body: formData,
+      headers: {
+        'Content-Type': 'multipart/form-data',
+        'Authorization' : 'Basic ' + Buffer.from('eeb6b933-0a11-11ef-a76e-da0c4b140285' + ':').toString('base64')
+      },
+    });
+    const data = await response.json();
+    console.log(data);
+    console.log("---------------------------------------------------------------------------------------------------------------------------");
+    const predictions = data.result[0].prediction; 
+    predictions.forEach(prediction => {
+        console.log(prediction); 
+    });
+  } catch (error) {
+    console.error('Error:', error);
+  }
 }
 
 // Thanks for watching
