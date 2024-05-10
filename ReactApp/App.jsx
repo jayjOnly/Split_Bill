@@ -14,7 +14,9 @@ import HomeScreen from './src/screen/HomeScreen'
 import ViewHistoryDetailScreen from './src/screen/ViewHistoryDetailScreen'
 import TermsNConditionScreen from './src/screen/TermsNCondScreen'
 import AccountSettingScreen from './src/screen/AccountSettingScreen'
-
+import AfterSpilt from './src/screen/AfterSpilt'
+import AssignItem from './src/screen/AssignItem'
+import FinalConfirm from './src/screen/FinalConfirm'
 
 const Stack = createNativeStackNavigator();
 
@@ -34,17 +36,20 @@ const App = () => {
     <ThemeContext.Provider value={{theme, updateTheme}}>
       <NavigationContainer>
         <Stack.Navigator screenOptions={{headerShown:false}}>
-
+          
           <Stack.Screen name='Login' component={LoginScreen}/>
           <Stack.Screen name='Register' component={RegisterScreen}/>
           <Stack.Screen name='Test' component={TestScreen}/>
-
+    
           <Stack.Screen name='BottomTab' component={TabNavi}/>
           <Stack.Screen name='Notification' component={NotificationScreen}/>
           <Stack.Screen name='Details' component={ViewDetailScreen}/>
           <Stack.Screen name='HistoryDetails' component={ViewHistoryDetailScreen}/>
           <Stack.Screen name='TOS' component={TermsNConditionScreen}/>
           <Stack.Screen name='AccountSetting' component={AccountSettingScreen}/>
+          <Stack.Screen name='AfterSpilt' component={AfterSpilt}/>
+          <Stack.Screen name='AssignItem' component={AssignItem}/>
+          <Stack.Screen name='FinalConfirm' component={FinalConfirm}/>
         </Stack.Navigator>
       </NavigationContainer>
     </ThemeContext.Provider>

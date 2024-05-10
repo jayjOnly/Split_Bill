@@ -13,17 +13,17 @@ const db = mysql.createConnection({
 })
 
 // Registration endpoint
-regisback.post('/usertable', (req, res) => {
-  const { username, email, password } = req.body;
-  const sql = `INSERT INTO usertable(id, username, email, password) VALUES (0, ?, ?, ?)`;
-  db.query(sql, [username, email, password], (err, result) => {
-    if (err) {
-      res.status(500).send('Internal Server Error');
-    } else {
-      res.status(200).send('Registration successful');
-    }
-  });
-});
+// regisback.post('/usertable', (req, res) => {
+//   const { username, email, password } = req.body;
+//   const sql = `INSERT INTO usertable(id, username, email, password) VALUES (0, ?, ?, ?)`;
+//   db.query(sql, [username, email, password], (err, result) => {
+//     if (err) {
+//       res.status(500).send('Internal Server Error');
+//     } else {
+//       res.status(200).send('Registration successful');
+//     }
+//   });
+// });
 
 regisback.post('/usertable', (req, res) => {
     const { username, email, password } = req.body;

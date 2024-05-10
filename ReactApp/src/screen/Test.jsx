@@ -132,9 +132,7 @@ const SplitScreen = () => {
             <Text style={{alignSelf:'center'}}>Upload File</Text>
           </TouchableOpacity>
         </View>
-      </View>
-      
-      
+      </View> 
   )
 };
 

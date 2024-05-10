@@ -30,7 +30,7 @@ const LoginScreen = ({navigation}) => {
 
   const handleLogin = () => {
     // Make a POST request to your backend server
-    fetch('http://192.168.69.1:5555/usertable', {
+    fetch('http://172.16.0.198:5555/usertable', {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json'

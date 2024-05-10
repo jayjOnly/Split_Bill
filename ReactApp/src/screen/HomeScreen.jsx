@@ -7,8 +7,6 @@ import { colors } from '../config/theme';
 import { ThemeContext } from '../context/ThemeContext';
 import { useContext } from 'react';
 
-// const theme = {mode: "dark"}
-
 
 const HomeScreen = ({navigation}) => {
   
@@ -39,12 +37,11 @@ const HomeScreen = ({navigation}) => {
   const [data, setData] = useState([])
 
   useEffect(() => {
-    fetch('http://192.168.69.1:8080/activityhistory') //ganti IPnya sama kek IP PC anda
+    fetch('http://172.16.0.198:8080/activityhistory') //ganti IPnya sama kek IP PC anda
     .then(res => res.json())
     .then(data => setData(data))
     .catch(err => console.log(err))
   }, [])
-
 
   return (
     <SafeAreaView style={{flex:1}}>

@@ -1,8 +1,5 @@
 import React from 'react';
 import { StyleSheet,Text, Button, View, ScrollView, SafeAreaView} from 'react-native';
-import { useNavigation } from '@react-navigation/native';
-import MainHeader from '../components/MainHeader';
-import ActivityBox from '../components/ActivityBox';
 import HistoryBox from '../components/HistoryBox';
 import { colors } from '../config/theme';
 import { ThemeContext } from '../context/ThemeContext';
@@ -40,7 +37,7 @@ const HistoryScreen = ({navigation}) => {
         <Text style={styles.header}>History</Text>
         <ScrollView>
           <View style={styles.activity}>
-            <HistoryBox navi={() => navigation.navigate("HistoryDetails")}/>
+            <HistoryBox navi={() => navigation.navigate("AfterSpilt")}/>
             <HistoryBox navi={() => navigation.navigate("HistoryDetails")}/>
             <HistoryBox navi={() => navigation.navigate("HistoryDetails")}/>
             <HistoryBox navi={() => navigation.navigate("HistoryDetails")}/>

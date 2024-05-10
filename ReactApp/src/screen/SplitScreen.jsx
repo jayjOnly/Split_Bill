@@ -80,7 +80,6 @@ const styles = StyleSheet.create({
     borderRadius:5,
     alignContent:'center',
     justifyContent:'center'
-    // marginTop: 10 
   }
 })
 
