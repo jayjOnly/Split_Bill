@@ -37,7 +37,7 @@ const HomeScreen = ({navigation}) => {
   const [data, setData] = useState([])
 
   useEffect(() => {
-    fetch('http://172.16.0.198:8080/activityhistory') //ganti IPnya sama kek IP PC anda
+    fetch('http://172.16.1.159:8080/activityhistory') //ganti IPnya sama kek IP PC anda
     .then(res => res.json())
     .then(data => setData(data))
     .catch(err => console.log(err))

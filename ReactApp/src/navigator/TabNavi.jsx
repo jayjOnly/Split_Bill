@@ -175,12 +175,14 @@ const TabNavi = ({ navigation }) => {
       console.log("---------------------------------------------------------------------------------------------------------------------------");
 
       const predictions = data.result[0].prediction;
+
       predictions.forEach(prediction => {
         console.log(prediction);
       });
-      const temp = data.result[0].prediction[5];
+      
 
-      navigation.navigate("AfterSpilt", {data:temp})
+      console.log("INI WOI")
+      navigation.navigate("AfterSpilt", {Info: predictions})
       setstate(false);
 
     } catch (error) {
