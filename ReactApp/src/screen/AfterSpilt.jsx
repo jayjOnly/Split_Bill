@@ -96,7 +96,8 @@ const AfterSpilt = ({navigation, route}) => {
       backgroundColor:ActiveColor.button,
       paddingHorizontal:50,
       paddingVertical:10,
-      borderRadius:15
+      borderRadius:15,
+      marginRight:10
     },
     box:{
       marginBottom:10,
@@ -113,7 +114,7 @@ const AfterSpilt = ({navigation, route}) => {
   const [items, setItems] = useState([]);
 
   const addItem = () => {
-    setItems([...items, { item: '', quantity: null, price: null, selectedBy: [] }]);
+    setItems([...items, { item: '', quantity: '', price: null, selectedBy: [] }]);
   };
 
   const handleChange = (text, type, index) => {
@@ -179,17 +180,17 @@ const AfterSpilt = ({navigation, route}) => {
         <Text style={styles.title}>Split Bill</Text>
       </View>
 
-      <View style={styles.box1}>
+      {/* <View style={styles.box1}>
         <Text style={styles.textheaderItem}>Item</Text>
         <Text style={styles.textheaderqty}>Qty</Text>
         <Text style={styles.textheaderprice}>Price</Text>
-      </View>
+      </View> */}
 
       <ScrollView style={{marginBottom:1,flex:1}}>
-        <View>
+        <View style={{marginTop:20}}>
           {items.map((item,index) =>{
             return(
-              <View key={index}>
+              <View key={index} style={{paddingHorizontal:20}}>
                 <TextInput
                   value={item.item}
                   onChangeText={(text) => handleChange(text, 'item', index)}
@@ -219,14 +220,14 @@ const AfterSpilt = ({navigation, route}) => {
           })}
         </View>
         
-        <View style={{marginBottom:20}}>
+        <View style={{marginBottom:20, flexDirection:'row', alignSelf:'center'}}>
           <TouchableOpacity onPress={addItem} style={styles.addButton}>
             <Text style={{fontSize:15, color:ActiveColor.text}}>Add</Text>
           </TouchableOpacity>  
-        </View>
-
-        <Button title='cek hasil' onPress={result}/>  
-        <Button title='Next' onPress={validateAndNext}/>      
+          <TouchableOpacity onPress={validateAndNext} style={styles.addButton}>
+            <Text style={{fontSize:15, color:ActiveColor.text}}>Next</Text>
+          </TouchableOpacity> 
+        </View>   
       </ScrollView>
     </SafeAreaView>
   )

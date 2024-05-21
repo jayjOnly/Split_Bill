@@ -1,4 +1,4 @@
-import { Button, FlatList, ScrollView, StyleSheet, Text, TouchableOpacity, View } from 'react-native'
+import { Button, ScrollView, StyleSheet, Text, TouchableOpacity, View } from 'react-native'
 import React, { useState } from 'react'
 import AntDesign from 'react-native-vector-icons/AntDesign'
 import { ThemeContext } from '../context/ThemeContext';
@@ -12,6 +12,9 @@ const AssignItem = ({navigation, route}) => {
   const {items} = route.params;
 
   const styles = StyleSheet.create({
+    page:{
+      backgroundColor:ActiveColor.background,
+    },
     screen:{
       flexDirection:'row',
       justifyContent:'center',
@@ -29,6 +32,14 @@ const AssignItem = ({navigation, route}) => {
         fontWeight:'700',
         marginRight:15,
         color: ActiveColor.text
+    },
+    NextButton:{
+      alignSelf:'center',
+      marginTop:20,
+      backgroundColor:ActiveColor.button,
+      paddingHorizontal:50,
+      paddingVertical:10,
+      borderRadius:15,
     },
   })
   
@@ -110,7 +121,7 @@ const AssignItem = ({navigation, route}) => {
           {selectedItems.map((item, index) => (
             <View key={index} style={{ flexDirection: 'row' }}>
               <TouchableOpacity
-                style={{ flex: 1, fontWeight: item.selectedBy.includes(selectedPersonId) ? 'bold' : 'normal' }}
+                style={{ flex: 1, backgroundColor:ActiveColor.background2, borderRadius:20, padding:7}}
                 onPress={() => handleItemSelection(item)}
               >
                 <View>
@@ -123,11 +134,14 @@ const AssignItem = ({navigation, route}) => {
               </TouchableOpacity>
             </View>
           ))}
+
+        <View style={{marginBottom:20, alignSelf:'center'}}>
+          <TouchableOpacity onPress={navigateToNext} style={styles.NextButton}>
+            <Text style={{fontSize:15, color:ActiveColor.intext}}>Confirm</Text>
+          </TouchableOpacity>  
+        </View>
         </ScrollView>
       </View>
-
-      <Button title="Next" onPress={navigateToNext} style={{ margin: 10 }} />
-      
     </SafeAreaView>
   )
 }

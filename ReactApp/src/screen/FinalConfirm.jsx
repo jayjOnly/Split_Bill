@@ -1,6 +1,5 @@
-import { Button, FlatList, ScrollView, StyleSheet, Text, TouchableOpacity, View } from 'react-native'
+import { StyleSheet, Text, View, ScrollView, TouchableOpacity, Button } from 'react-native'
 import React, { useState } from 'react'
-import AntDesign from 'react-native-vector-icons/AntDesign'
 import { ThemeContext } from '../context/ThemeContext';
 import { useContext } from 'react';
 import { colors } from '../config/theme';
@@ -12,7 +11,14 @@ const FinalConfirm = ({navigation, route}) => {
   const {selectedItems , people} = route.params;
 
   const styles = StyleSheet.create({
-
+    FinishButton:{
+      alignSelf:'center',
+      marginTop:20,
+      backgroundColor:ActiveColor.button,
+      paddingHorizontal:50,
+      paddingVertical:10,
+      borderRadius:15,
+    },
   })
 
   console.log(selectedItems)
@@ -57,25 +63,33 @@ const FinalConfirm = ({navigation, route}) => {
   console.log(groupedData)
   
   return (    
-    <SafeAreaView>
-        <View style={{ padding: 10 }}>
-            {Object.entries(groupedData).map(([personId, items]) => (
-                <View key={personId} style={{ marginBottom: 10 }}>
-                <Text style={{ fontWeight: 'bold' }}>{personId} {findNameById(parseInt(personId))} Selected:</Text> 
-                {items.length === 0 ? (
-                    <Text>No items selected</Text>
-                ) : (
-                    <View>
-                    {items.map((item,i) => ( 
-                        <Text key={i}>
-                        {item.item} - Rp{calculateSplitPrice(item, selectedItems)}
-                        </Text>
-                    ))}
-                    </View>
-                )}
-                </View>
-            ))}
-         </View>
+    <SafeAreaView style={{flex:1}}>
+        <ScrollView style={{ padding: 10, flex:1 }}>
+          
+          {Object.entries(groupedData).map(([personId, items]) => (
+              <View key={personId} style={{ marginBottom: 10 }}>
+              <Text style={{ fontWeight: 'bold' }}>{findNameById(parseInt(personId))}:</Text> 
+              {items.length === 0 ? (
+                  <Text>No items selected</Text>
+              ) : (
+                  <View>
+                  {items.map((item,i) => ( 
+                      <Text key={i}>
+                      {item.item} - Rp{calculateSplitPrice(item, selectedItems)}
+                      </Text>
+                  ))}
+                  </View>
+              )}
+              </View>
+          ))}
+
+          <View style={{marginBottom:20, alignSelf:'center'}}>
+            <TouchableOpacity onPress={() => navigation.navigate("BottomTab")} style={styles.FinishButton}>
+              <Text style={{fontSize:15, color:ActiveColor.intext}}>Confirm</Text>
+            </TouchableOpacity>  
+          </View>          
+        </ScrollView>
+
     </SafeAreaView>
   )
 }
