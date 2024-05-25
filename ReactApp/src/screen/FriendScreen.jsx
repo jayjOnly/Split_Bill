@@ -1,14 +1,65 @@
 import { ScrollView, StyleSheet, Text, TouchableOpacity, View } from 'react-native'
-import React from 'react'
+import React, { useEffect, useState, route } from 'react';
 import FriendBox from '../components/FriendBox'
 import AntDesign from 'react-native-vector-icons/AntDesign'
 import { colors } from '../config/theme';
 import { ThemeContext } from '../context/ThemeContext';
 import { useContext } from 'react';
+import { SafeAreaView } from 'react-native-safe-area-context';
+const getUserData = async (userId) => {
+  try {
+    const response = await fetch(
+      `http://192.168.69.1:1111/friendlist?user1=${userId}`
+    );
+    
+    if (!response.ok) {
+      // console.log(response)
+      throw new Error(`Error fetching data: ${response.status}`);
+    }
+    
+    const data = await response.json();
+    return data;
+  } catch (error) {
+    console.error(error);
+  }
+};
 
-const FriendScreen = () => {
+
+const FriendScreen = ({navigation, route}) => {
   const {theme} = useContext(ThemeContext);
   let ActiveColor = colors[theme.mode]
+  const [usersname, setusername] = useState()
+  const [usersid, setuserid] = useState()
+  const [friends, setFriendData] = useState()
+  const [users, setusers] = useState([])
+  
+
+  React.useEffect(() => { 
+    const fetchData = async (x) => {
+      try {
+        const data = await getUserData(x);
+        setFriendData(data);
+      } catch (error) {
+        console.error(error);
+        // Handle errors appropriately, like displaying an error message
+      }
+    };
+
+    if(route.params != undefined){
+      // console.log("------------------")
+      // console.log(route)
+      // console.log("------------------")
+      setusers(route.params)
+      setusername(route.params.username)
+      setuserid(route.params.id)
+      fetchData(route.params.id);
+    }
+  }, [])
+  console.log("------------------------------------friendpage--------------------------------------")
+  console.log(usersname) 
+  console.log(usersid)
+  console.log(friends)
+  
 
   const styles = StyleSheet.create({
     plus:{
@@ -38,29 +89,41 @@ const FriendScreen = () => {
     },
   })
 
-  return (
-    <View style={{flex:1, backgroundColor: ActiveColor.background}}>
-      <View style={{marginBottom:70}}>
-        <View style={styles.head}>
-          <Text style={styles.header}>Friends</Text>
+  // const friends = [
+  //   { name: 'John Doe', telephone: "0812-3456-7890"},
+  //   { name: 'Jane Smith', telephone: "0811-1111-1111" },
+  //   { name: 'Michael Brown', telephone: "0808 0808 0808" },
+  //   { name: 'Police', telephone: "911" },
+  //   { name: 'Andrew Jansen', telephone: "0852 3735 9855" },
+  //   { name: 'Fernando Morientes', telephone: "0852 8768 4572" },
+  //   { name: 'BOSS', telephone: "08?? ???? ????" }
+  // ];
 
-          <TouchableOpacity style={styles.plus}>
-            <AntDesign name='plus' size={28} style={styles.icon}/>
-          </TouchableOpacity>
+
+  let datas = {users, friends}
+  return (
+    <SafeAreaView style={{flex:1, backgroundColor: ActiveColor.background}}>
+        <View style={{marginBottom:70}}>
+          <View style={styles.head}>
+            <Text style={styles.header}>Friends</Text>
+            <TouchableOpacity style={styles.plus} onPress={() => navigation.navigate("AddFriend", {datas})}>
+              <AntDesign name='plus' size={28} style={styles.icon}/>
+            </TouchableOpacity>
+          </View>
+
+          <ScrollView style={styles.list}>
+            
+            
+              {friends != undefined ? friends.map((x, key) =>
+                <FriendBox key={key} name={x.username} telephone={x.phonenumber}/>           
+              ) : console.log("restart")}
+              
+
+          </ScrollView>
         </View>
 
-        <ScrollView style={styles.list}>
-          <FriendBox />
-          <FriendBox />
-          <FriendBox />
-          <FriendBox />
-          <FriendBox />
-          <FriendBox />
-          <FriendBox />
-          <FriendBox />
-        </ScrollView>
-      </View>
-    </View>
+    </SafeAreaView>
+    
   )
 }
 

@@ -8,8 +8,16 @@ import { ThemeContext } from '../context/ThemeContext';
 import { useContext } from 'react';
 
 
-const HomeScreen = ({navigation}) => {
-  
+const HomeScreen = ({navigation, route}) => {
+  const [usersname, setusername] = useState()
+  // React.useEffect(() => {
+    if(route.params != undefined){
+      setusername(route.params.username)
+    }
+  // })
+  console.log(route)
+  console.log(usersname) 
+
   const {theme} = useContext(ThemeContext);
   let ActiveColor = colors[theme.mode]
 
@@ -37,7 +45,7 @@ const HomeScreen = ({navigation}) => {
   const [data, setData] = useState([])
 
   useEffect(() => {
-    fetch('http://172.16.1.159:8080/activityhistory') //ganti IPnya sama kek IP PC anda
+    fetch('http://192.168.69.1:8080/activityhistory') //ganti IPnya sama kek IP PC anda
     .then(res => res.json())
     .then(data => setData(data))
     .catch(err => console.log(err))
@@ -48,7 +56,7 @@ const HomeScreen = ({navigation}) => {
       {/* <StatusBar backgroundColor={'#FFFFFF'} /> */}
       <View style={styles.container}>
         <View>
-          <MainHeader title="Udin" navi={() => navigation.navigate("Notification")}/>
+          <MainHeader title={usersname != undefined ? usersname : ""} navi={() => navigation.navigate("Notification")}/>
         </View>
 
         <ScrollView>

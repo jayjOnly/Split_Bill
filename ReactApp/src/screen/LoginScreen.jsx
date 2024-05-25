@@ -28,26 +28,25 @@ const LoginScreen = ({navigation}) => {
   const [password, setPassword] = useState();
   let ActiveColor = colors[theme.mode]
 
-  const handleLogin = () => {
+  const handleLogin = async () => {
     // Make a POST request to your backend server
-    fetch('http://172.16.1.159:5555/usertable', {
+    const response = await fetch('http://192.168.69.1:5555/usertable', {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json'
       },
       body: JSON.stringify({ email, password })
     })
-    .then(response => {
-      // console.log(response)
-      if (response.ok) {
-        console.log('Login successful');
-        navigation.navigate("BottomTab");
-       
-      } else {
-        console.log('Login failed');
-      }
-    })
-    .catch(error => console.error('Error:', error));
+    const data = await response.json();
+    if (response.ok) {
+      console.log('Login successful');
+      console.log('User:', data); // Log user data
+      navigation.navigate("BottomTab", {data});
+      
+    } else {
+      console.log('Login failed');
+    }
+    
   };
   
   return (

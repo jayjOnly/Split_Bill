@@ -9,7 +9,13 @@ import { SafeAreaView } from 'react-native-safe-area-context';
 const AssignItem = ({navigation, route}) => {
   const {theme} = useContext(ThemeContext);
   let ActiveColor = colors[theme.mode];
-  const {items} = route.params;
+  console.log(route)
+  let items = route.params.Item;
+  let people = route.params.SelectUser
+  let curruser = route.params.CurrUser
+  console.log(items)
+  console.log("PEOPLE")
+  console.log(people)
 
   const styles = StyleSheet.create({
     page:{
@@ -45,14 +51,14 @@ const AssignItem = ({navigation, route}) => {
   
   // console.log(items)
 
-  const people = [
-    { id: 10, name: 'John Doe' },
-    { id: 20, name: 'Jane Smith' },
-    { id: 35, name: 'Michael Brown' },
-    { id: 47, name: 'John Doe' },
-    { id: 58, name: 'Jane Smith' },
-    { id: 69, name: 'Michael Brown' }
-  ];
+  // const people = [
+  //   { id: 10, username: 'John Doe' },
+  //   { id: 20, username: 'Jane Smith' },
+  //   { id: 35, username: 'Michael Brown' },
+  //   { id: 47, username: 'John Doe' },
+  //   { id: 58, username: 'Jane Smith' },
+  //   { id: 69, username: 'Michael Brown' }
+  // ];
 
   const ListItem = ({ name, isSelected, onPress }) => (
     <TouchableOpacity onPress={onPress}>
@@ -71,7 +77,7 @@ const AssignItem = ({navigation, route}) => {
     people.map((person) => (
       <ListItem
         key={person.id} // Key for each item
-        name={person.name}
+        name={person.username}
         isSelected={selectedPersonId === person.id}
         onPress={() => setSelectedPersonId(person.id)}
       />
@@ -94,7 +100,7 @@ const AssignItem = ({navigation, route}) => {
 
   const navigateToNext = () => {
     // console.log(selectedItems)
-    navigation.navigate("FinalConfirm", { selectedItems , people });
+    navigation.navigate("FinalConfirm", { Select: selectedItems , People: people });
   };
 
   return (    

@@ -17,11 +17,14 @@ import AccountSettingScreen from './src/screen/AccountSettingScreen'
 import AfterSpilt from './src/screen/AfterSpilt'
 import AssignItem from './src/screen/AssignItem'
 import FinalConfirm from './src/screen/FinalConfirm'
+import AddFriend from './src/screen/AddFriend'
+import SelectFriend from './src/screen/SelectFriend'
+import ChooseFriend from './src/screen/ChooseFriend'
 
 const Stack = createNativeStackNavigator();
 
 const App = () => {
-  const [theme, setTheme] = useState({mode : "dark"})
+  const [theme, setTheme] = useState({mode : "light"})
 
   const updateTheme = (newTheme) => {
     let mode;
@@ -40,7 +43,7 @@ const App = () => {
           <Stack.Screen name='Login' component={LoginScreen}/>
           <Stack.Screen name='Register' component={RegisterScreen}/>
           <Stack.Screen name='Test' component={TestScreen}/>
-    
+          <Stack.Screen name='HomeScreen' component={HomeScreen}/>
           <Stack.Screen name='BottomTab' component={TabNavi}/>
           <Stack.Screen name='Notification' component={NotificationScreen}/>
           <Stack.Screen name='Details' component={ViewDetailScreen}/>
@@ -50,6 +53,8 @@ const App = () => {
           <Stack.Screen name='AfterSpilt' component={AfterSpilt}/>
           <Stack.Screen name='AssignItem' component={AssignItem}/>
           <Stack.Screen name='FinalConfirm' component={FinalConfirm}/>
+          <Stack.Screen name='AddFriend' component={AddFriend}/>
+          <Stack.Screen name='ChooseFriend' component={ChooseFriend}/>
         </Stack.Navigator>
       </NavigationContainer>
     </ThemeContext.Provider>
