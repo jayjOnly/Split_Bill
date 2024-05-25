@@ -20,7 +20,9 @@ loginback.post('/usertable', (req, res) => {
       res.status(500).send('Internal Server Error');
     } else {
       if (result.length > 0) {
-        res.status(200).send('Login successful');
+        console.log(result[0])
+        const user = result[0]; // Extract user object
+        res.status(200).send({ message: 'Login successful', user});
       } else {
         res.status(401).send('Invalid email or password');
       }

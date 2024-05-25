@@ -23,7 +23,7 @@ global.Buffer = require('buffer').Buffer;
 // Thanks for watching
 const Tab = createBottomTabNavigator();
 
-const TabNavi = ({ navigation }) => {
+const TabNavi = ({ navigation, route}) => {
   const [state, setstate] = useState(false)
 
   const { theme } = useContext(ThemeContext);
@@ -96,7 +96,7 @@ const TabNavi = ({ navigation }) => {
       // marginTop: 10 
     }
   }
-
+  
   const AccessCamera = async () => {
     const url = 'https://app.nanonets.com/api/v2/OCR/Model/c793292e-86cd-45ff-9545-58e487768d51/LabelFile/?async=false';
   
@@ -147,7 +147,7 @@ const TabNavi = ({ navigation }) => {
     navigation.navigate("AfterSpilt");
   }
 
-  const AcessGallery = async () => {
+  const AcessGallery = async (x) => {
     const url = 'https://app.nanonets.com/api/v2/OCR/Model/c793292e-86cd-45ff-9545-58e487768d51/LabelFile/?async=false';
 
     const result = await launchImageLibrary({ mediaType: 'photo', quality: 1 })
@@ -172,7 +172,7 @@ const TabNavi = ({ navigation }) => {
       const data = await response.json();
       console.log(data);
 
-      console.log("---------------------------------------------------------------------------------------------------------------------------");
+      console.log("-------------------------------------------------------------------------------------------------------------------------------------------------------------------------");
 
       const predictions = data.result[0].prediction;
 
@@ -182,7 +182,7 @@ const TabNavi = ({ navigation }) => {
       
 
       console.log("INI WOI")
-      navigation.navigate("AfterSpilt", {Info: predictions})
+      navigation.navigate("AfterSpilt", {Info: predictions, UserInfo: x})
       setstate(false);
 
     } catch (error) {
@@ -190,12 +190,25 @@ const TabNavi = ({ navigation }) => {
     }
   }
 
+
+  const [userinfo, setuser] = useState()
+  React.useEffect(()=>{
+    if(route.params != undefined){
+      setuser(route.params.data.user)
+      
+    }
+  })
+  // console.log("simpan")
+  // console.log(userinfo)
   return (
-    <Tab.Navigator style={{ backgroundColor: '#000000' }} screenOptions={{ headerShown: false, tabBarHideOnKeyboard: true, tabBarShowLabel: false, tabBarStyle: styles.tabBarStyle }}>
-      <Tab.Screen
+    <Tab.Navigator style={{ backgroundColor: '#000000' }} screenOptions={({route}) => ({ headerShown: false, tabBarHideOnKeyboard: true, tabBarShowLabel: false, tabBarStyle: styles.tabBarStyle })}>
+      <Tab.Screen 
         name="Home"
         component={HomeScreen}
+        initialParams={userinfo}
         options={{
+          tabBarLabel: ({ focused, route }) =>
+            focused ? getDataForScreen(route).tabBarLabel : null, // Conditionally render label  
           tabBarIcon: ({ focused }) => {
             return (
               <View style={{ alignItems: "center", justifyContent: "center" }}>
@@ -209,6 +222,7 @@ const TabNavi = ({ navigation }) => {
       <Tab.Screen
         name="History"
         component={HistoryScreen}
+        initialParams={userinfo}
         options={{
           tabBarIcon: ({ focused }) => {
             return (
@@ -284,7 +298,7 @@ const TabNavi = ({ navigation }) => {
                             borderRadius: 5,
                             alignContent: 'center',
                             justifyContent: 'center'
-                          }} onPress={AcessGallery}>
+                          }} onPress={() => AcessGallery(userinfo)}>
                             <MaterialCommunityIcons name='image-multiple-outline' size={45} color={"#33363E"} style={{ alignSelf: 'center' }} />
                           </TouchableOpacity>
                           <Text style={{
@@ -328,6 +342,7 @@ const TabNavi = ({ navigation }) => {
       <Tab.Screen
         name="Friends"
         component={FriendScreen}
+        initialParams={userinfo}
         options={{
           tabBarIcon: ({ focused }) => {
             return (
@@ -342,6 +357,7 @@ const TabNavi = ({ navigation }) => {
       <Tab.Screen
         name="Settings"
         component={ProfileScreen}
+        initialParams={userinfo}
         options={{
           tabBarIcon: ({ focused }) => {
             return (

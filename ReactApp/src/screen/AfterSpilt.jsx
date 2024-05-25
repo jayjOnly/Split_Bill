@@ -9,6 +9,7 @@ import { SafeAreaView } from 'react-native-safe-area-context';
 const AfterSpilt = ({navigation, route}) => {
   const {theme} = useContext(ThemeContext);
   let ActiveColor = colors[theme.mode];
+  let users = route.params.UserInfo
   const thing = route.params.Info;
 
   const styles = StyleSheet.create({
@@ -113,10 +114,11 @@ const AfterSpilt = ({navigation, route}) => {
   console.log(thing[thing.length - 1].cells)
 
   const data = thing[thing.length - 1].cells
-
-  data.forEach(info =>{
-    console.log(info)
-  })
+ 
+  // data.forEach(info =>{
+  //   console.log(info)
+  // })
+  
   
 
   const [items, setItems] = useState([]);
@@ -124,6 +126,34 @@ const AfterSpilt = ({navigation, route}) => {
   const addItem = () => {
     setItems([...items, { item: '', quantity: '', price: null, selectedBy: [] }]);
   };
+
+  React.useEffect(() => {
+    const tempItems = [];
+    let quantity = 0
+    let price = 0
+    let name = ""
+    data.forEach(info =>{
+      if(info.label == "Quantity"){
+
+        quantity = info.text
+      }else if(info.label == "Description"){
+        name = info.text
+      }else if(info.label == "Line_Amount"){
+        price = info.text.replace(/,/g, '')
+      }
+      if(info.col == 3){
+        //append ke object 
+        tempItems.push({ item: name, quantity: quantity, price: price, selectedBy: [] })
+        quantity = 0
+        price = 0
+        name = ""
+      }
+    })
+
+    setItems([...items, ...tempItems]);
+  }, [])
+
+  console.log(items)
 
   const handleChange = (text, type, index) => {
     setItems((prevItems) =>
@@ -151,7 +181,7 @@ const AfterSpilt = ({navigation, route}) => {
     }
 
     // Handle navigating to the next page here (replace with your logic)
-    navigation.navigate("AssignItem", {items})
+    navigation.navigate("ChooseFriend", {Items: items, User: users})
   };
 
   const isNumber = (value) => {
@@ -209,7 +239,7 @@ const AfterSpilt = ({navigation, route}) => {
       </View>
 
 
-      <View>
+      {/* <View>
       {data.map((item) => (
         <View key={item.id}>
           {item.label === 'Quantity' && (
@@ -237,7 +267,18 @@ const AfterSpilt = ({navigation, route}) => {
           )}
         </View>
       ))}
-      </View>
+      
+      </View> */}
+
+      {/* <View>
+        {data.map((data) => (
+          <View key={data.id}>
+            {data.label === 'Description' && <Text>Food Name: {data.text}</Text>}
+            {data.label === 'Quantity' && <Text>Quantity: {data.text}</Text>}
+            {data.label === 'Line_Amount' && <Text>Price: {data.text}</Text>}
+          </View>
+        ))}
+      </View> */}
 
       <ScrollView style={{marginBottom:1,flex:1}}>
         <View style={{marginTop:20}}>

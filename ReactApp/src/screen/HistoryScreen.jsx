@@ -1,11 +1,22 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import { StyleSheet,Text, Button, View, ScrollView, SafeAreaView} from 'react-native';
 import HistoryBox from '../components/HistoryBox';
 import { colors } from '../config/theme';
 import { ThemeContext } from '../context/ThemeContext';
 import { useContext } from 'react';
 
-const HistoryScreen = ({navigation}) => {
+const HistoryScreen = ({navigation, route}) => {
+  const [usersname, setusername] = useState()
+  React.useEffect(() => {
+    if(route.params != undefined){
+      // console.log("------------------")
+      // console.log(route)
+      // console.log("------------------")
+      setusername(route.params.username)
+    }
+  })
+  console.log(usersname) 
+
   const {theme} = useContext(ThemeContext);
   let ActiveColor = colors[theme.mode]
 

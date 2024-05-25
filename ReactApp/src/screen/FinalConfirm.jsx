@@ -8,7 +8,10 @@ import { SafeAreaView } from 'react-native-safe-area-context';
 const FinalConfirm = ({navigation, route}) => {
   const {theme} = useContext(ThemeContext);
   let ActiveColor = colors[theme.mode];
-  const {selectedItems , people} = route.params;
+  // console.log("ROUTE")
+  // console.log(route)
+  let selectedItems = route.params.Select 
+  let people = route.params.People;
 
   const styles = StyleSheet.create({
     FinishButton:{
@@ -21,8 +24,8 @@ const FinalConfirm = ({navigation, route}) => {
     },
   })
 
-  console.log(selectedItems)
-  console.log(people)
+  // console.log(selectedItems)
+  // console.log(people)
 
   const groupBySelectedId = (selectedItems, people) => {
     const groupedItems = {};
@@ -39,7 +42,8 @@ const FinalConfirm = ({navigation, route}) => {
         }
       });
     });
-
+    console.log("Grouped")
+    console.log(groupedItems)
     return groupedItems;
   };
 
@@ -57,7 +61,7 @@ const FinalConfirm = ({navigation, route}) => {
 
   const findNameById = (id) => {
     const foundItem = people.find((item) => item.id === id);
-    return foundItem ? foundItem.name : null;
+    return foundItem ? foundItem.username : null;
   };
 
   console.log(groupedData)

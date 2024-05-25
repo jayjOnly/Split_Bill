@@ -5,7 +5,7 @@ import { colors } from '../config/theme';
 import { ThemeContext } from '../context/ThemeContext';
 import { useContext } from 'react';
 
-const FriendBox = () => {
+const FriendBox = ({name, telephone, ketikaClick, bentuk}) => {
   const {theme} = useContext(ThemeContext);
   let ActiveColor = colors[theme.mode]
 
@@ -40,10 +40,10 @@ const FriendBox = () => {
     }
   })
 
+  
   return (
     <View>
-      <TouchableOpacity>
-        <View style={styles.box}>
+        <TouchableOpacity style={bentuk != undefined ? bentuk : styles.box} onPress={ketikaClick}>
             <View style={styles.profileAvatarWrapper}>
               <Image
                 alt=""
@@ -53,16 +53,15 @@ const FriendBox = () => {
                 style={styles.profileAvatar} />
             </View>
             <View style={{flex:1}}>
-              <Text style={styles.text}>Nama</Text>
-              <Text style={styles.text}>No.Telp</Text>
+              <Text style={styles.text}>{name}</Text>
+              <Text style={styles.text}>{telephone}</Text>
             </View>
             <TouchableOpacity 
               onPress={() => Alert.alert("Reminder have been sent")}
               style={styles.icon}>
               <MaterialIcons name='notifications-active' size={30} style={styles.icon}/>
             </TouchableOpacity>
-        </View>
-      </TouchableOpacity>
+        </TouchableOpacity>
     </View>
   )
 }

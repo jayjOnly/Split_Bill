@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import {
   StyleSheet,
   SafeAreaView,
@@ -16,7 +16,17 @@ import { colors } from '../config/theme';
 import { ThemeContext } from '../context/ThemeContext';
 import { useContext } from 'react';
 
-export default function Example({navigation}) {
+export default function Example({navigation, route}) {
+  const [usersname, setusername] = useState()
+  React.useEffect(() => {
+    if(route.params != undefined){
+      // console.log("------------------")
+      // console.log(route)
+      // console.log("------------------")
+      setusername(route.params.username)
+    }
+  })
+  console.log(usersname) 
   const {theme, updateTheme} = useContext(ThemeContext);
   let ActiveColor = colors[theme.mode]
 
