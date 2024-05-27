@@ -24,7 +24,7 @@ loginback.post('/usertable', (req, res) => {
         const user = result[0]; // Extract user object
         res.status(200).send({ message: 'Login successful', user});
       } else {
-        res.status(401).send('Invalid email or password');
+        res.status(401).send({message: 'Invalid email or password'});
       }
     }
   });

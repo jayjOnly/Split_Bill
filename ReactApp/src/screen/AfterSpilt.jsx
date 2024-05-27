@@ -9,7 +9,7 @@ import { SafeAreaView } from 'react-native-safe-area-context';
 const AfterSpilt = ({navigation, route}) => {
   const {theme} = useContext(ThemeContext);
   let ActiveColor = colors[theme.mode];
-  let users = route.params.UserInfo
+  let users = route.params.UserInfo;
   const thing = route.params.Info;
 
   const styles = StyleSheet.create({
@@ -114,12 +114,6 @@ const AfterSpilt = ({navigation, route}) => {
   console.log(thing[thing.length - 1].cells)
 
   const data = thing[thing.length - 1].cells
- 
-  // data.forEach(info =>{
-  //   console.log(info)
-  // })
-  
-  
 
   const [items, setItems] = useState([]);
 
@@ -134,7 +128,6 @@ const AfterSpilt = ({navigation, route}) => {
     let name = ""
     data.forEach(info =>{
       if(info.label == "Quantity"){
-
         quantity = info.text
       }else if(info.label == "Description"){
         name = info.text
@@ -165,9 +158,6 @@ const AfterSpilt = ({navigation, route}) => {
     setItems((prevItems) => prevItems.filter((_, i) => i !== index));
   };
 
-  const result = () => {
-    console.log(items)
-  };
 
   const validateAndNext = () => {
     const hasEmptyFields = items.some(
@@ -204,25 +194,12 @@ const AfterSpilt = ({navigation, route}) => {
     return errorMessage;
   };
 
-  const [quantity, setQuantity] = useState('');
-  const [itemName, setItemName] = useState('');
-  const [price, setPrice] = useState('');
+  // const calculateTotal = (item) => {
+  //   console.log(data);
+  //   return 1;
+  // };
 
-  const handleInputChange = (text, label) => {
-    switch (label) {
-      case 'Quantity':
-        setQuantity(text);
-        break;
-      case 'Description':
-        setItemName(text);
-        break;
-      case 'Line_Amount':
-        setPrice(text);
-        break;
-      default:
-        break;
-    }
-  };
+  // const { totalPrice} = calculateTotal(data[0].item);
 
   return (    
     <SafeAreaView style={styles.page}>
@@ -238,47 +215,6 @@ const AfterSpilt = ({navigation, route}) => {
         <Text style={styles.title}>Split Bill</Text>
       </View>
 
-
-      {/* <View>
-      {data.map((item) => (
-        <View key={item.id}>
-          {item.label === 'Quantity' && (
-            <TextInput
-              value={quantity}
-              onChangeText={(text) => handleInputChange(text, item.label)}
-              placeholder="Quantity"
-              keyboardType="numeric"
-            />
-          )}
-          {item.label === 'Description' && (
-            <TextInput
-              value={itemName}
-              onChangeText={(text) => handleInputChange(text, item.label)}
-              placeholder="Item Name"
-            />
-          )}
-          {item.label === 'Line_Amount' && (
-            <TextInput
-              value={price}
-              onChangeText={(text) => handleInputChange(text, item.label)}
-              placeholder="Price"
-              keyboardType="numeric"
-            />
-          )}
-        </View>
-      ))}
-      
-      </View> */}
-
-      {/* <View>
-        {data.map((data) => (
-          <View key={data.id}>
-            {data.label === 'Description' && <Text>Food Name: {data.text}</Text>}
-            {data.label === 'Quantity' && <Text>Quantity: {data.text}</Text>}
-            {data.label === 'Line_Amount' && <Text>Price: {data.text}</Text>}
-          </View>
-        ))}
-      </View> */}
 
       <ScrollView style={{marginBottom:1,flex:1}}>
         <View style={{marginTop:20}}>
@@ -313,6 +249,9 @@ const AfterSpilt = ({navigation, route}) => {
             )
           })}
         </View>
+
+        <Text>Total Price: {totalPrice} IDR</Text>
+        <Text>Tax (11%): {taxAmount} IDR</Text>
         
         <View style={{marginBottom:20, flexDirection:'row', alignSelf:'center'}}>
           <TouchableOpacity onPress={addItem} style={styles.addButton}>

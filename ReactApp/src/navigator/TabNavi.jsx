@@ -192,16 +192,18 @@ const TabNavi = ({ navigation, route}) => {
 
 
   const [userinfo, setuser] = useState()
+
   React.useEffect(()=>{
     if(route.params != undefined){
       setuser(route.params.data.user)
       
     }
   })
-  // console.log("simpan")
-  // console.log(userinfo)
+
+  console.log("simpan")
+  console.log(userinfo)
   return (
-    <Tab.Navigator style={{ backgroundColor: '#000000' }} screenOptions={({route}) => ({ headerShown: false, tabBarHideOnKeyboard: true, tabBarShowLabel: false, tabBarStyle: styles.tabBarStyle })}>
+    <Tab.Navigator style={{ backgroundColor: '#000000' }} options={{}} screenOptions={({route}) => ({ headerShown: false, tabBarHideOnKeyboard: true, tabBarShowLabel: false, tabBarStyle: styles.tabBarStyle })}>
       <Tab.Screen 
         name="Home"
         component={HomeScreen}

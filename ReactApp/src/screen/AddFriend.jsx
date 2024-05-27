@@ -21,7 +21,7 @@ const AddFriend = ({navigation, route}) => {
 
      
     const handleAddFriend = async (phoneNumber) => {
-        fetch('http://192.168.69.1:1212/friendlist', {
+        fetch('http://192.168.241.60:1212/friendlist', {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json'
