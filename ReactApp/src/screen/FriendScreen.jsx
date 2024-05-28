@@ -9,7 +9,7 @@ import { SafeAreaView } from 'react-native-safe-area-context';
 const getUserData = async (userId) => {
   try {
     const response = await fetch(
-      `http://192.168.69.1:1111/friendlist?user1=${userId}`
+      `http://172.16.0.149:1111/friendlist?user1=${userId}`
     );
     
     if (!response.ok) {
