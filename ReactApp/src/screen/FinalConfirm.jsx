@@ -12,7 +12,15 @@ const FinalConfirm = ({navigation, route}) => {
   // console.log(route)
   let selectedItems = route.params.Select 
   let people = route.params.People;
-
+  let tax = route.params.Tax;
+  let total = route.params.Total;
+  let count = 0
+  people.forEach((x) =>{
+    count += 1
+  })
+  console.log(people)
+  console.log(count)
+  console.log(tax)
   const styles = StyleSheet.create({
     FinishButton:{
       alignSelf:'center',
@@ -24,6 +32,9 @@ const FinalConfirm = ({navigation, route}) => {
     },
   })
 
+  taxperperson = (total*parseFloat(tax)/100)/parseFloat(count)
+  console.log("TAX")
+  console.log(taxperperson)
   // console.log(selectedItems)
   // console.log(people)
 
@@ -79,9 +90,10 @@ const FinalConfirm = ({navigation, route}) => {
                   <View>
                   {items.map((item,i) => ( 
                       <Text key={i}>
-                      {item.item} - Rp{calculateSplitPrice(item, selectedItems)}
+                      {item.item} - Rp. {calculateSplitPrice(item, selectedItems)}
                       </Text>
                   ))}
+                  <Text>Tax - Rp. {taxperperson}</Text>
                   </View>
               )}
               </View>

@@ -13,6 +13,7 @@ const ChooseFriend = ({navigation, route}) => {
   let ActiveColor = colors[theme.mode]
   let selectedItems = route.params.Items;
   let curruser = route.params.User;
+  let tax = route.params.Tax
   console.log(curruser)
   console.log(selectedItems)
 
@@ -89,7 +90,7 @@ const ChooseFriend = ({navigation, route}) => {
             onPress={() => {
                 console.log("SELECTED")
                 console.log(selectedUsers)
-                navigation.navigate("AssignItem", {SelectUser: selectedUsers, CurrUser: curruser, Item: selectedItems})
+                navigation.navigate("ChooseType", {SelectUser: selectedUsers, CurrUser: curruser, Item: selectedItems, Tax: tax})
             }}
             style={{
                 backgroundColor: "pink",

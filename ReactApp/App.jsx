@@ -20,6 +20,8 @@ import FinalConfirm from './src/screen/FinalConfirm'
 import AddFriend from './src/screen/AddFriend'
 import SelectFriend from './src/screen/SelectFriend'
 import ChooseFriend from './src/screen/ChooseFriend'
+import ChooseType from './src/screen/ChooseType'
+import FinalConfirm2 from './src/screen/FinalConfirm2'
 
 const Stack = createNativeStackNavigator();
 
@@ -55,6 +57,8 @@ const App = () => {
           <Stack.Screen name='FinalConfirm' component={FinalConfirm}/>
           <Stack.Screen name='AddFriend' component={AddFriend}/>
           <Stack.Screen name='ChooseFriend' component={ChooseFriend}/>
+          <Stack.Screen name='ChooseType' component={ChooseType}/>
+          <Stack.Screen name='FinalConfirm2' component={FinalConfirm2}/>
         </Stack.Navigator>
       </NavigationContainer>
     </ThemeContext.Provider>
