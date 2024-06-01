@@ -18,7 +18,7 @@ const uploadImage = async (imageUri, imageType, imageName) => {
   });
 
   try {
-    const response = await fetch('http://10.0.2.2:5000/upload', {
+    const response = await fetch('http://192.168.241.60:5000/upload', {
       method: 'POST',
       body: formData,
       headers: {

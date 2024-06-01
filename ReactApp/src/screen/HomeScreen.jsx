@@ -9,13 +9,13 @@ import { useContext } from 'react';
 
 
 const HomeScreen = ({navigation, route}) => {
-  const [usersname, setusername] = useState()
-  // React.useEffect(() => {
-    if(route.params != undefined){
-      setusername(route.params.username)
-    }
-  // })
-  console.log(route)
+  
+  let usersname = null
+  if(route.params != undefined){
+    usersname = route.params.username
+  }
+
+  console.log("Home Page")
   console.log(usersname) 
 
   const {theme} = useContext(ThemeContext);
@@ -45,7 +45,7 @@ const HomeScreen = ({navigation, route}) => {
   const [data, setData] = useState([])
 
   useEffect(() => {
-    fetch('http://192.168.69.1:8080/activityhistory') //ganti IPnya sama kek IP PC anda
+    fetch('http://172.16.0.149:8080/activityhistory') //ganti IPnya sama kek IP PC anda
     .then(res => res.json())
     .then(data => setData(data))
     .catch(err => console.log(err))
