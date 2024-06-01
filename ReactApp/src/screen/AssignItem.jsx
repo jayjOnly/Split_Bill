@@ -10,8 +10,21 @@ const AssignItem = ({navigation, route}) => {
   const {theme} = useContext(ThemeContext);
   let ActiveColor = colors[theme.mode];
   console.log(route)
+  
   let items = route.params.Item;
-  let people = route.params.SelectUser
+  let total = parseFloat(0)
+  items.forEach(x => {
+    // console.log(x.price)
+    
+    total = total + parseFloat(x.price)
+    console.log(total)
+  });
+  console.log("TOTAL")
+  console.log(total)
+  
+  let people = route.params.SelectUser;
+  let tax = route.params.Tax;
+  console.log(tax)
   let curruser = route.params.CurrUser
   console.log(items)
   console.log("PEOPLE")
@@ -82,7 +95,7 @@ const AssignItem = ({navigation, route}) => {
         onPress={() => setSelectedPersonId(person.id)}
       />
     ));
-
+    
   const handleItemSelection = (item) => {
     const newSelectedItems = selectedItems.map((selectedItem) => {
       if (selectedItem === item) {
@@ -100,19 +113,19 @@ const AssignItem = ({navigation, route}) => {
 
   const navigateToNext = () => {
     // console.log(selectedItems)
-    navigation.navigate("FinalConfirm", { Select: selectedItems , People: people });
+    navigation.navigate("FinalConfirm", { Select: selectedItems , People: people, Tax: tax, Total: total});
   };
 
   return (    
     <SafeAreaView style={styles.page}>
       <View style={styles.screen}>
-        <TouchableOpacity>
+        {/* <TouchableOpacity>
           <AntDesign 
               onPress={() => navigation.navigate("AfterSpilt") }
               name='left' 
               size={25} 
               style={styles.BackButton}/>
-        </TouchableOpacity>
+        </TouchableOpacity> */}
         <Text style={styles.title}>Assign Item</Text>
       </View>
 

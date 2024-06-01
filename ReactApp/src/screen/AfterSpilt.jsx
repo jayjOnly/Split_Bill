@@ -116,7 +116,7 @@ const AfterSpilt = ({navigation, route}) => {
   const data = thing[thing.length - 1].cells
 
   const [items, setItems] = useState([]);
-
+  const [percent, setPercent] = useState('')
   const addItem = () => {
     setItems([...items, { item: '', quantity: '', price: null, selectedBy: [] }]);
   };
@@ -171,7 +171,7 @@ const AfterSpilt = ({navigation, route}) => {
     }
 
     // Handle navigating to the next page here (replace with your logic)
-    navigation.navigate("ChooseFriend", {Items: items, User: users})
+    navigation.navigate("ChooseFriend", {Items: items, User: users, Tax: percent})
   };
 
   const isNumber = (value) => {
@@ -200,6 +200,8 @@ const AfterSpilt = ({navigation, route}) => {
   // };
 
   // const { totalPrice} = calculateTotal(data[0].item);
+
+  
 
   return (    
     <SafeAreaView style={styles.page}>
@@ -250,8 +252,24 @@ const AfterSpilt = ({navigation, route}) => {
           })}
         </View>
 
-        <Text>Total Price: {totalPrice} IDR</Text>
-        <Text>Tax (11%): {taxAmount} IDR</Text>
+        <View
+          style={{
+            flexDirection: 'row',
+            borderBottomColor: '#ccc',
+            marginVertical:30,
+            marginHorizontal:20,
+            borderBottomWidth: 1,
+            paddingBottom: 8,
+            marginBottom: 25,
+          }}>
+          {/* <MaterialCommunityIcons name='at' size={20} color={ActiveColor.iconOnClick} style={{marginRight: 5}} />     */}
+          <TextInput
+            placeholder={'Input Tax (%)'}
+            keyboardType={"decimal-pad"}
+            style={{flex: 1, paddingVertical: 0, color:"white", color: ActiveColor.text}}
+            onChangeText={x=>setPercent(x)}
+          />
+        </View>
         
         <View style={{marginBottom:20, flexDirection:'row', alignSelf:'center'}}>
           <TouchableOpacity onPress={addItem} style={styles.addButton}>
