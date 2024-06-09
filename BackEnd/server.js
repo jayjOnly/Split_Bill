@@ -3,6 +3,9 @@ const {loginback} = require('./loginback')
 const { regisback } = require('./regisback')
 const { friendlist } = require('./friendlist')
 const { addfriend } = require('./addfriend')
+const {addactivity} = require('./addactivity')
+const {historylist} = require('./historylist')
+const {getactivitylist} = require('./getactivitylist')
 
 app.listen(8080, () => {
     console.log("listeningHome...")
@@ -22,4 +25,16 @@ friendlist.listen(1111, () => {
 
 addfriend.listen(1212, () => {
     console.log("listeningAddFriend...")
+})
+
+addactivity.listen(5000, () => {
+    console.log("listeningAddActivity...")
+})
+
+historylist.listen(1113, () => {
+    console.log("listeningHistoryList...")
+})
+
+getactivitylist.listen(1115, () => {
+    console.log("listeningActivityList...")
 })

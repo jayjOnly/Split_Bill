@@ -4,7 +4,7 @@ import { colors } from '../config/theme';
 import { ThemeContext } from '../context/ThemeContext';
 import { useContext } from 'react';
 
-const ActivityBox = ({navi}) => {
+const ActivityBox = ({navi, name, nominal, date}) => {
   const {theme} = useContext(ThemeContext);
   let ActiveColor = colors[theme.mode]
 
@@ -36,9 +36,9 @@ const ActivityBox = ({navi}) => {
     <View>
       <TouchableOpacity onPress={navi}>
         <View style={styles.box}>
-          <Text style={styles.text}>Judul</Text>
-          <Text style={styles.text}>DD-MM-YY</Text>
-          <Text style={styles.harga}>Rp. 100.000</Text>
+          <Text style={styles.text}>{name}</Text>
+          <Text style={styles.text}>{date}</Text>
+          <Text style={styles.harga}>{nominal}</Text>
         </View>
       </TouchableOpacity>
     </View>

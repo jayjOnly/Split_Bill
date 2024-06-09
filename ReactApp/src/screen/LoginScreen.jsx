@@ -8,7 +8,7 @@ import {
   StyleSheet,
 } from 'react-native';
 
-
+import { useSelector } from 'react-redux';
 import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons'
 import { useNavigation } from '@react-navigation/native';
 import { ThemeContext } from '../context/ThemeContext';
@@ -23,7 +23,7 @@ import { colors } from '../config/theme';
 
 
 const LoginScreen = ({navigation}) => {
-  const {theme} = useContext(ThemeContext);
+  const {theme, updateID, updateUsersname} = useContext(ThemeContext);
   const [email, setEmail] = useState();
   const [password, setPassword] = useState();
   let ActiveColor = colors[theme.mode]
@@ -41,6 +41,8 @@ const LoginScreen = ({navigation}) => {
     if (response.ok) {
       console.log('Login successful');
       console.log('User:', data); // Log user data
+      updateID(data.user.id)
+      updateUsersname(data.user.username)
       navigation.navigate("BottomTab", {data});
       
     } else {

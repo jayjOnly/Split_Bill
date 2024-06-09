@@ -7,19 +7,84 @@ import { colors } from '../config/theme';
 import { ThemeContext } from '../context/ThemeContext';
 import { useContext } from 'react';
 
+const getUserData = async (userId) => {
+  try {
+    const response = await fetch(
+      `http://192.168.69.1:1115/activitylist?users=${userId}`
+    );
+    
+    if (!response.ok) {
+      // console.log(response)
+      throw new Error(`Error fetching data: ${response.status}`);
+    }
+    
+    const data = await response.json();
+    return data;
+  } catch (error) {
+    console.error(error);
+  }
+};
 
 const HomeScreen = ({navigation, route}) => {
+  const {theme, id, usersname} = useContext(ThemeContext);
+  console.log("THIS IS ID")
+  console.log(id)
+  let ActiveColor = colors[theme.mode]
+
+  // console.log("FIRST")
+  // if(route.params != undefined){
+  //   console.log(route.params.id)
+  // }
   
-  let usersname = null
-  if(route.params != undefined){
-    usersname = route.params.username
+  const[datas, getdatas] = useState([])
+  React.useEffect(() => { 
+    console.log("satu")
+    const fetchData = async (x) => {
+      try {
+        const data = await getUserData(x);
+        getdatas(data);
+      } catch (error) {
+        console.error(error);
+        // Handle errors appropriately, like displaying an error message
+      }
+    };
+
+    fetchData(id)
+    
+  }, [])
+  
+  console.log(datas)
+  const newData = [];
+  const seenGroup = {};
+
+  const deepCopy = (obj) => {
+    const copy = {};
+    Object.entries(obj).forEach(([key, value]) => {
+      copy[key] = typeof value === 'object' ? deepCopy(value) : value;
+    });
+    return copy;
+  };
+
+  for (const data of datas) {
+    const groupId = data.groupID;
+    if (!(groupId in seenGroup)) {
+      seenGroup[groupId] = deepCopy(data);
+      newData.push(seenGroup[groupId]);
+    } else {
+      seenGroup[groupId].itemPrice += data.itemPrice;
+    }
   }
 
-  console.log("Home Page")
-  console.log(usersname) 
+  console.log(newData)
+  // let usersname = null
+  // if(route.params != undefined){
+  //   usersname = route.params.username
+  // }
 
-  const {theme} = useContext(ThemeContext);
-  let ActiveColor = colors[theme.mode]
+  // console.log("Home Page")
+  // console.log(usersname) 
+
+  
 
   const styles = StyleSheet.create({
     container:{
@@ -64,8 +129,8 @@ const HomeScreen = ({navigation, route}) => {
             <Text style={styles.title}>Activity</Text>
 
             <View>
-            {data.map((d,i) =>
-              <ActivityBox key={i} navi={() => navigation.navigate("Details")} name={d.Nama} nominal={d.Nominal} date={d.Tanggal}/>
+            {newData.map((d,i) =>
+              <ActivityBox key={i} navi={() => navigation.navigate("Details")} name={d.username} nominal={d.itemPrice} date={d.activityDate}/>
             )}
             </View>
 

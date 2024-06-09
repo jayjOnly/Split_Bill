@@ -29,7 +29,7 @@ const ChooseFriend = ({navigation, route}) => {
   })
 
   const [users, setusers] = useState([])
-  const [selectedUsers, setSelectedUsers] = useState([]); // New state for selected users
+  const [selectedUsers, setSelectedUsers] = useState([curruser]); // New state for selected users
 
   const handleFriendSelect = (user) => {
     setSelectedUsers((prevSelectedUsers) => [...prevSelectedUsers, user]); // Add user to selectedUsers
@@ -88,7 +88,8 @@ const ChooseFriend = ({navigation, route}) => {
 
         <TouchableOpacity
             onPress={() => {
-                console.log("SELECTED")
+                console.log("SELECTED")      
+                // handleFriendSelect(curruser)
                 console.log(selectedUsers)
                 navigation.navigate("ChooseType", {SelectUser: selectedUsers, CurrUser: curruser, Item: selectedItems, Tax: tax})
             }}

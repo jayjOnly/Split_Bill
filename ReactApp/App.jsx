@@ -27,6 +27,8 @@ const Stack = createNativeStackNavigator();
 
 const App = () => {
   const [theme, setTheme] = useState({mode : "light"})
+  const [id, setID] = useState(0)
+  const [usersname, setUsersname] = useState("")
 
   const updateTheme = (newTheme) => {
     let mode;
@@ -37,8 +39,16 @@ const App = () => {
     setTheme(newTheme);
   }
 
+  const updateID = (x) => {
+    setID(x);
+  }
+
+  const updateUsersname = (y) => {
+    setUsersname(y)
+  }
+
   return (
-    <ThemeContext.Provider value={{theme, updateTheme}}>
+    <ThemeContext.Provider value={{theme, updateTheme, id, updateID, usersname, updateUsersname}}>
       <NavigationContainer>
         <Stack.Navigator screenOptions={{headerShown:false}}>
           

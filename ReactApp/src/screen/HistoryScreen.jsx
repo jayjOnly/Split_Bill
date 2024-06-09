@@ -5,7 +5,70 @@ import { colors } from '../config/theme';
 import { ThemeContext } from '../context/ThemeContext';
 import { useContext } from 'react';
 
+const getUserData = async (userId) => {
+  try {
+    const response = await fetch(
+      `http://192.168.69.1:1113/activitylist?users=${userId}`
+    );
+    
+    if (!response.ok) {
+      // console.log(response)
+      throw new Error(`Error fetching data: ${response.status}`);
+    }
+    
+    const data = await response.json();
+    return data;
+  } catch (error) {
+    console.error(error);
+  }
+};
+
 const HistoryScreen = ({navigation, route}) => {
+  // console.log("TEST")
+  // console.log(route.params.id)
+  const[datas, getdatas] = useState([])
+  React.useEffect(() => { 
+    const fetchData = async (x) => {
+      try {
+        const data = await getUserData(x);
+        getdatas(data);
+        // console.log(data)
+      } catch (error) {
+        console.error(error);
+        // Handle errors appropriately, like displaying an error message
+      }
+    };
+  
+    if(route.params != undefined){ 
+      fetchData(route.params.id)
+    }
+  }, [])
+
+  console.log(datas)
+  const newData = [];
+  const seenGroup = {};
+
+  const deepCopy = (obj) => {
+    const copy = {};
+    Object.entries(obj).forEach(([key, value]) => {
+      copy[key] = typeof value === 'object' ? deepCopy(value) : value;
+    });
+    return copy;
+  };
+
+  for (const data of datas) {
+    const groupId = data.groupID;
+    if (!(groupId in seenGroup)) {
+      seenGroup[groupId] = deepCopy(data);
+      newData.push(seenGroup[groupId]);
+    } else {
+      seenGroup[groupId].itemPrice += data.itemPrice;
+    }
+  }
+
+  console.log(newData)
+
+
   const [usersname, setusername] = useState()
   React.useEffect(() => {
     if(route.params != undefined){
@@ -36,6 +99,7 @@ const HistoryScreen = ({navigation, route}) => {
     activity:{
       backgroundColor: ActiveColor.box,
       paddingHorizontal: 15,
+      paddingBottom:500,
       paddingVertical:15,
       borderRadius:25,
       marginHorizontal:15
@@ -44,20 +108,16 @@ const HistoryScreen = ({navigation, route}) => {
 
   return (
     <SafeAreaView style={{flex:1}}>
-      <View style={styles.container}>
+      <View >
         <Text style={styles.header}>History</Text>
         <ScrollView>
           <View style={styles.activity}>
-            <HistoryBox navi={() => navigation.navigate("AfterSpilt")}/>
-            <HistoryBox navi={() => navigation.navigate("HistoryDetails")}/>
-            <HistoryBox navi={() => navigation.navigate("HistoryDetails")}/>
-            <HistoryBox navi={() => navigation.navigate("HistoryDetails")}/>
-            <HistoryBox navi={() => navigation.navigate("HistoryDetails")}/>
-            <HistoryBox navi={() => navigation.navigate("HistoryDetails")}/>
-            <HistoryBox navi={() => navigation.navigate("HistoryDetails")}/>
-            <HistoryBox navi={() => navigation.navigate("HistoryDetails")}/>
-            <HistoryBox navi={() => navigation.navigate("HistoryDetails")}/>
+            {newData.map((d,i) =>
+
+              <HistoryBox key={i} navi={() => navigation.navigate("HistoryDetails")} name={d.itemName} nominal={d.itemPrice} date={d.activityDate}/>
+            )}
           </View>
+          
         </ScrollView>
       </View>
     </SafeAreaView>

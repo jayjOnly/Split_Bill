@@ -6,3 +6,6 @@ AddFriend
 ChooseFriend
 FriendScreen
 HomeScreen
+HistoryScreen
+FinalConfirm
+FinalConfirm2
