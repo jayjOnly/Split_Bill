@@ -17,6 +17,7 @@ const ChooseType = ({navigation, route}) => {
   let tax = route.params.Tax
   let selectedUsers = route.params.SelectUser
   console.log("TEST")
+  console.log(selectedUsers)  
   console.log(curruser)
   console.log(selectedItems)
 

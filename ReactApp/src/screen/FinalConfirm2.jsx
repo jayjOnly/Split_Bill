@@ -31,7 +31,7 @@ const FinalConfirm2 = ({navigation, route}) => {
   people.forEach((x) =>{
     count += 1
   })
-  billperperson = (total/parseFloat(count))
+  billperperson = (total/parseFloat(count)).toFixed(2)
   taxperperson = (total*parseFloat(tax)/100)/parseFloat(count)
   console.log("count")
   console.log(taxperperson)
@@ -78,20 +78,58 @@ const FinalConfirm2 = ({navigation, route}) => {
   people.forEach((x)=>{
     console.log(x)
   })
+  
+  const groupedData = {};
+  for (const userId of people) {
+    if (!groupedData[userId.id]) {
+      groupedData[userId.id] = []; // Initialize the array for the user if it doesn't exist
+    }
+    
+    groupedData[userId.id].push({
+        item: "BAGI RATA",
+        price: billperperson,
+        quantity: "1",
+        selectedBy: [0]
+    });
+  }
+
+  
+  
+  console.log(groupedData)
+
+
+  const handleAddActivity = async () => {
+    fetch('http://192.168.69.1:5000/activitylist', {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({
+          "datas": groupedData,
+          "tax": taxperperson,
+          "assignID": curruser.id
+        })
+    })
+    .catch(error => console.error('Error:', error));
+  };
+
   return (    
     <SafeAreaView style={{flex:1}}>
         <ScrollView style={{ padding: 10, flex:1 }}>
         {people != undefined ? people.map((peoples, key) => 
-            <View>
+            <View key={key}>
                 <Text style={{ fontWeight: 'bold' }}>{peoples.username}:</Text> 
-                <Text>Bill - Rp. {billperperson.toFixed(2)}</Text>
+                <Text>Bill - Rp. {billperperson}</Text>
                 <Text>Tax - Rp. {taxperperson}</Text>
             </View>    
         ) : console.log("people not found")}
         
             
           <View style={{marginBottom:20, alignSelf:'center'}}>
-            <TouchableOpacity onPress={() => navigation.navigate("BottomTab")} style={styles.FinishButton}>
+            <TouchableOpacity onPress={() => {
+              handleAddActivity()
+              navigation.navigate("BottomTab")
+              }} style={styles.FinishButton}>
               <Text style={{fontSize:15, color:ActiveColor.intext}}>Confirm</Text>
             </TouchableOpacity>  
           </View>          

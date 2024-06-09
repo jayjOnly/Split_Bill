@@ -113,7 +113,7 @@ const AssignItem = ({navigation, route}) => {
 
   const navigateToNext = () => {
     // console.log(selectedItems)
-    navigation.navigate("FinalConfirm", { Select: selectedItems , People: people, Tax: tax, Total: total});
+    navigation.navigate("FinalConfirm", { Select: selectedItems , People: people, Tax: tax, Total: total, CurrUser:curruser});
   };
 
   return (    
