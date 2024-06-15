@@ -9,7 +9,7 @@ import { SafeAreaView } from 'react-native-safe-area-context';
 const getUserData = async (userId) => {
   try {
     const response = await fetch(
-      `http://192.168.69.1:1111/friendlist?user1=${userId}`
+      `http://172.16.1.241:1111/friendlist?user1=${userId}`
     );
     
     if (!response.ok) {
@@ -112,7 +112,6 @@ const FriendScreen = ({navigation, route}) => {
           </View>
 
           <ScrollView style={styles.list}>
-            
             
               {friends != undefined ? friends.map((x, key) =>
                 <FriendBox key={key} name={x.username} telephone={x.phonenumber}/>           

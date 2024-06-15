@@ -1,16 +1,19 @@
 describe('Login Test', () => {
     it('should login with valid credentials', async () => {
         //access elemen input
-        await $('//android.widget.EditText[@text="Email ID"]').setValue("jacky@gmail.com");
-        await $('//android.widget.EditText[@text="Password"]').setValue("j");
+        await $('//android.widget.EditText[@text="Email ID"]').setValue("andrew@gmail.com");
+        await $('//android.widget.EditText[@text="Password"]').setValue("andrew1");
 
-        await $(
-            '//android.view.ViewGroup[@content-desc="Login"]'
-        ).click();
+        await $('//android.view.ViewGroup[@content-desc="Login"]').click();
+    });
 
-        // const selector = 	
-        //     'new UiSelector().className("android.view.ViewGroup").instance(11)';
-        // const Activitylist = await $(`android=${selector}`)
-        // await expect(Activitylist).toHaveText("Activity")
+    it('add friend', async () => {
+        //access elemen input
+        await $('//android.widget.TextView[@text="Friends"]').click();
+        await $('//android.widget.TextView[@text=""]').click();
+
+        await $('//android.widget.EditText[@text="Input Number"]').setValue("0811-1111-1111");
+        await $('//android.view.ViewGroup[@content-desc="Add Friend"]').click();
+
     });
 });

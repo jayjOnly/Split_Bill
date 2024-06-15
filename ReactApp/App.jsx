@@ -8,7 +8,6 @@ import NotificationScreen from './src/screen/NotificationScreen'
 import ViewDetailScreen from './src/screen/ViewDetailScreen'
 import LoginScreen from './src/screen/LoginScreen'
 import RegisterScreen from './src/screen/RegisterScreen'
-import TestScreen from './src/screen/Test'
 import { ThemeContext } from './src/context/ThemeContext'
 import HomeScreen from './src/screen/HomeScreen'
 import ViewHistoryDetailScreen from './src/screen/ViewHistoryDetailScreen'
@@ -18,7 +17,6 @@ import AfterSpilt from './src/screen/AfterSpilt'
 import AssignItem from './src/screen/AssignItem'
 import FinalConfirm from './src/screen/FinalConfirm'
 import AddFriend from './src/screen/AddFriend'
-import SelectFriend from './src/screen/SelectFriend'
 import ChooseFriend from './src/screen/ChooseFriend'
 import ChooseType from './src/screen/ChooseType'
 import FinalConfirm2 from './src/screen/FinalConfirm2'
@@ -54,7 +52,6 @@ const App = () => {
           
           <Stack.Screen name='Login' component={LoginScreen}/>
           <Stack.Screen name='Register' component={RegisterScreen}/>
-          <Stack.Screen name='Test' component={TestScreen}/>
           <Stack.Screen name='HomeScreen' component={HomeScreen}/>
           <Stack.Screen name='BottomTab' component={TabNavi}/>
           <Stack.Screen name='Notification' component={NotificationScreen}/>

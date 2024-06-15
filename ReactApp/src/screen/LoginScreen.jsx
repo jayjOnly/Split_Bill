@@ -30,7 +30,7 @@ const LoginScreen = ({navigation}) => {
 
   const handleLogin = async () => {
     // Make a POST request to your backend server
-    const response = await fetch('http://192.168.69.1:5555/usertable', {
+    const response = await fetch('http://172.16.1.241:5555/usertable', {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json'
@@ -44,11 +44,11 @@ const LoginScreen = ({navigation}) => {
       updateID(data.user.id)
       updateUsersname(data.user.username)
       navigation.navigate("BottomTab", {data});
-      
+      setPassword('');
+      setEmail('');
     } else {
       console.log('Login failed');
     }
-    
   };
   
   return (
@@ -86,6 +86,7 @@ const LoginScreen = ({navigation}) => {
           <TextInput
             placeholder={'Email ID'}
             keyboardType={"email-address"}
+            value={email}
             style={{flex: 1, paddingVertical: 0, color:"white", color: ActiveColor.text}}
             onChangeText={x=>setEmail(x)}
           />
@@ -109,6 +110,7 @@ const LoginScreen = ({navigation}) => {
             keyboardType={'ascii-capable'}
             style={{flex: 1, paddingVertical: 0, color:"white", color: ActiveColor.text}}
             secureTextEntry={true}
+            value={password}
             onChangeText={x=>setPassword(x)}
         />
 
@@ -121,7 +123,6 @@ const LoginScreen = ({navigation}) => {
           onPress={() => {
             console.log(email, password);
             handleLogin();
-            
           }}
           style={{
             backgroundColor: ActiveColor.button,
@@ -140,51 +141,7 @@ const LoginScreen = ({navigation}) => {
           </Text>
         </TouchableOpacity>
 
-        {/* <Text style={{textAlign: 'center', color: '#666', marginBottom: 30}}>
-          Or, login with ...
-        </Text>
-
-        <View
-          style={{
-            flexDirection: 'row',
-            justifyContent: 'space-between',
-            marginBottom: 30,
-          }}>
-          <TouchableOpacity
-            onPress={() => {}}
-            style={{
-              borderColor: '#ddd',
-              borderWidth: 2,
-              borderRadius: 10,
-              paddingHorizontal: 30,
-              paddingVertical: 10,
-            }}>
-            <GoogleSVG height={24} width={24} />
-          </TouchableOpacity>
-          <TouchableOpacity
-            onPress={() => {}}
-            style={{
-              borderColor: '#ddd',
-              borderWidth: 2,
-              borderRadius: 10,
-              paddingHorizontal: 30,
-              paddingVertical: 10,
-            }}>
-            <FacebookSVG height={24} width={24} />
-          </TouchableOpacity>
-          <TouchableOpacity
-            onPress={() => {}}
-            style={{
-              borderColor: '#ddd',
-              borderWidth: 2,
-              borderRadius: 10,
-              paddingHorizontal: 30,
-              paddingVertical: 10,
-            }}>
-            <TwitterSVG height={24} width={24} />
-          </TouchableOpacity>
-        </View> */}
-
+      
         <View
           style={{
             flexDirection: 'row',
