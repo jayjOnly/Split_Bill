@@ -14,7 +14,6 @@ const AssignItem = ({navigation, route}) => {
   let items = route.params.Item;
   let total = parseFloat(0)
   items.forEach(x => {
-    // console.log(x.price)
     
     total = total + parseFloat(x.price)
     console.log(total)
@@ -61,17 +60,6 @@ const AssignItem = ({navigation, route}) => {
       borderRadius:15,
     },
   })
-  
-  // console.log(items)
-
-  // const people = [
-  //   { id: 10, username: 'John Doe' },
-  //   { id: 20, username: 'Jane Smith' },
-  //   { id: 35, username: 'Michael Brown' },
-  //   { id: 47, username: 'John Doe' },
-  //   { id: 58, username: 'Jane Smith' },
-  //   { id: 69, username: 'Michael Brown' }
-  // ];
 
   const ListItem = ({ name, isSelected, onPress }) => (
     <TouchableOpacity onPress={onPress}>
@@ -112,20 +100,12 @@ const AssignItem = ({navigation, route}) => {
   };
 
   const navigateToNext = () => {
-    // console.log(selectedItems)
     navigation.navigate("FinalConfirm", { Select: selectedItems , People: people, Tax: tax, Total: total, CurrUser:curruser});
   };
 
   return (    
     <SafeAreaView style={styles.page}>
       <View style={styles.screen}>
-        {/* <TouchableOpacity>
-          <AntDesign 
-              onPress={() => navigation.navigate("AfterSpilt") }
-              name='left' 
-              size={25} 
-              style={styles.BackButton}/>
-        </TouchableOpacity> */}
         <Text style={styles.title}>Assign Item</Text>
       </View>
 

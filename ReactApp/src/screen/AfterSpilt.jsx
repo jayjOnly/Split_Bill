@@ -193,16 +193,7 @@ const AfterSpilt = ({navigation, route}) => {
     });
     return errorMessage;
   };
-
-  // const calculateTotal = (item) => {
-  //   console.log(data);
-  //   return 1;
-  // };
-
-  // const { totalPrice} = calculateTotal(data[0].item);
-
   
-
   return (    
     <SafeAreaView style={styles.page}>
 
@@ -262,7 +253,6 @@ const AfterSpilt = ({navigation, route}) => {
             paddingBottom: 8,
             marginBottom: 25,
           }}>
-          {/* <MaterialCommunityIcons name='at' size={20} color={ActiveColor.iconOnClick} style={{marginRight: 5}} />     */}
           <TextInput
             placeholder={'Input Tax (%)'}
             keyboardType={"decimal-pad"}

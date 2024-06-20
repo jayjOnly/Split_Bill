@@ -30,11 +30,6 @@ const HomeScreen = ({navigation, route}) => {
   console.log("THIS IS ID")
   console.log(id)
   let ActiveColor = colors[theme.mode]
-
-  // console.log("FIRST")
-  // if(route.params != undefined){
-  //   console.log(route.params.id)
-  // }
   
   const[datas, getdatas] = useState([])
   React.useEffect(() => { 
@@ -76,15 +71,6 @@ const HomeScreen = ({navigation, route}) => {
   }
 
   console.log(newData)
-  // let usersname = null
-  // if(route.params != undefined){
-  //   usersname = route.params.username
-  // }
-
-  // console.log("Home Page")
-  // console.log(usersname) 
-
-  
 
   const styles = StyleSheet.create({
     container:{
@@ -110,7 +96,7 @@ const HomeScreen = ({navigation, route}) => {
   const [data, setData] = useState([])
 
   useEffect(() => {
-    fetch('http://192.168.69.1:8080/activityhistory') //ganti IPnya sama kek IP PC anda
+    fetch('http://172.16.0.29:8080/activityhistory') //ganti IPnya sama kek IP PC anda
     .then(res => res.json())
     .then(data => setData(data))
     .catch(err => console.log(err))
@@ -118,7 +104,6 @@ const HomeScreen = ({navigation, route}) => {
 
   return (
     <SafeAreaView style={{flex:1}}>
-      {/* <StatusBar backgroundColor={'#FFFFFF'} /> */}
       <View style={styles.container}>
         <View>
           <MainHeader title={usersname != undefined ? usersname : ""} navi={() => navigation.navigate("Notification")}/>

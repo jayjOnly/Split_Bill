@@ -8,7 +8,7 @@ import { useContext } from 'react';
 const getUserData = async (userId) => {
   try {
     const response = await fetch(
-      `http://192.168.69.1:1113/activitylist?users=${userId}`
+      `http://172.16.0.29:1113/activitylist?users=${userId}`
     );
     
     if (!response.ok) {
@@ -24,8 +24,6 @@ const getUserData = async (userId) => {
 };
 
 const HistoryScreen = ({navigation, route}) => {
-  // console.log("TEST")
-  // console.log(route.params.id)
   const[datas, getdatas] = useState([])
   React.useEffect(() => { 
     const fetchData = async (x) => {
@@ -72,9 +70,6 @@ const HistoryScreen = ({navigation, route}) => {
   const [usersname, setusername] = useState()
   React.useEffect(() => {
     if(route.params != undefined){
-      // console.log("------------------")
-      // console.log(route)
-      // console.log("------------------")
       setusername(route.params.username)
     }
   })

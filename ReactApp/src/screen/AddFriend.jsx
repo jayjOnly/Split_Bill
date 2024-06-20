@@ -43,7 +43,6 @@ const AddFriend = ({navigation, route}) => {
     };
       
         // ... (rest of your component code)
-      
 
     let ActiveColor = colors[theme.mode]
     if(route.params != undefined){
@@ -116,16 +115,9 @@ const AddFriend = ({navigation, route}) => {
                     />
                     </View>
                     
-                   
-                
                     <TouchableOpacity
                     onPress={() => {
                         if(number != undefined){
-                            // console.log(formatNumber(number))
-                            // friend.forEach(x => {
-                            //     console.log(x)
-                            // })
-                            // console.log(addFunction(number))
                             console.log(formatNumber(number))
                             console.log(user.id)
                             if(addFunction(number)){

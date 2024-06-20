@@ -47,7 +47,6 @@ const ChooseFriend = ({navigation, route}) => {
       }
       
       const data = await response.json();
-    //   console.log(data)
       setusers(data)
       return data;
     } catch (error) {
@@ -89,7 +88,6 @@ const ChooseFriend = ({navigation, route}) => {
         <TouchableOpacity
             onPress={() => {
                 console.log("SELECTED")      
-                // handleFriendSelect(curruser)
                 console.log(selectedUsers)
                 navigation.navigate("ChooseType", {SelectUser: selectedUsers, CurrUser: curruser, Item: selectedItems, Tax: tax})
             }}

@@ -20,8 +20,6 @@ const FinalConfirm2 = ({navigation, route}) => {
   let tax = route.params.Tax;
   let total = parseFloat(0)
   items.forEach(x => {
-    // console.log(x.price)
-    
     total = total + parseFloat(x.price)
     console.log(total)
   });

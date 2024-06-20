@@ -16,11 +16,6 @@ import { useContext } from 'react';
 import { colors } from '../config/theme';
 
 
-// import GoogleSVG from '../assets/images/google.svg'
-// import FacebookSVG from '../assets/images/facebook.svg';
-// import TwitterSVG from '../assets/images/twitter.svg';
-
-
 
 const LoginScreen = ({navigation}) => {
   const {theme, updateID, updateUsersname} = useContext(ThemeContext);
@@ -30,7 +25,7 @@ const LoginScreen = ({navigation}) => {
 
   const handleLogin = async () => {
     // Make a POST request to your backend server
-    const response = await fetch('http://172.16.1.241:5555/usertable', {
+    const response = await fetch('http://172.16.0.29:5555/usertable', {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json'
@@ -55,14 +50,6 @@ const LoginScreen = ({navigation}) => {
     <SafeAreaView style={{flex: 1, justifyContent: 'center',backgroundColor: ActiveColor.background }}>
        <SafeAreaView style={{flex: 1, justifyContent: 'center'}}>
       <View style={{paddingHorizontal: 25}}>
-        {/* <View style={{alignItems: 'center'}}>
-          <LoginSVG
-            height={300}
-            width={300}
-            style={{transform: [{rotate: '-5deg'}]}}
-          />
-        </View> */}
-        
         <Text
           style={{
             fontFamily: 'Roboto-Medium',

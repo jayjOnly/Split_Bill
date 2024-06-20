@@ -9,11 +9,10 @@ import { SafeAreaView } from 'react-native-safe-area-context';
 const getUserData = async (userId) => {
   try {
     const response = await fetch(
-      `http://172.16.1.241:1111/friendlist?user1=${userId}`
+      `http://172.16.0.29:1111/friendlist?user1=${userId}`
     );
     
     if (!response.ok) {
-      // console.log(response)
       throw new Error(`Error fetching data: ${response.status}`);
     }
     
@@ -46,9 +45,6 @@ const FriendScreen = ({navigation, route}) => {
     };
 
     if(route.params != undefined){
-      // console.log("------------------")
-      // console.log(route)
-      // console.log("------------------")
       setusers(route.params)
       setusername(route.params.username)
       setuserid(route.params.id)
@@ -88,16 +84,6 @@ const FriendScreen = ({navigation, route}) => {
       marginHorizontal:8
     },
   })
-
-  // const friends = [
-  //   { name: 'John Doe', telephone: "0812-3456-7890"},
-  //   { name: 'Jane Smith', telephone: "0811-1111-1111" },
-  //   { name: 'Michael Brown', telephone: "0808 0808 0808" },
-  //   { name: 'Police', telephone: "911" },
-  //   { name: 'Andrew Jansen', telephone: "0852 3735 9855" },
-  //   { name: 'Fernando Morientes', telephone: "0852 8768 4572" },
-  //   { name: 'BOSS', telephone: "08?? ???? ????" }
-  // ];
 
 
   let datas = {users, friends}

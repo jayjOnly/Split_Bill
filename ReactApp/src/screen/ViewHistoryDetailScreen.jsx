@@ -200,7 +200,6 @@ const ViewHistoryDetailScreen = ({navigation}) => {
           </View>  
         </View>
           
-        {/* <View style={styles.line} /> */}
       </View>
         <TouchableOpacity
               onPress={() => navigation.navigate("BottomTab")}

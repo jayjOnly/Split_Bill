@@ -17,9 +17,6 @@ import { colors } from '../config/theme';
 import { ThemeContext } from '../context/ThemeContext';
 import { useContext } from 'react';
 
-// const theme = {mode: "dark"}
-
-
 const HomeScreen = ({navigation}) => {
   
     const {theme, updateTheme} = useContext(ThemeContext);
@@ -136,8 +133,5 @@ const HomeScreen = ({navigation}) => {
     </SafeAreaView>
   );
 };
-
-
-
 
 export default HomeScreen

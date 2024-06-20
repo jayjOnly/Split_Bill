@@ -15,10 +15,6 @@ import { colors } from '../config/theme';
 import { ThemeContext } from '../context/ThemeContext';
 
 const RegisterScreen = ({navigation}) => {
-  // console.log(props)
-  // const [date, setDate] = useState(new Date());
-  // const [open, setOpen] = useState(false);
-  // const [dobLabel, setDobLabel] = useState('Date of Birth');
 
   const [email, setEmail] = useState();
   const [password, setPassword] = useState();
@@ -64,51 +60,6 @@ const RegisterScreen = ({navigation}) => {
           }}>
           Register
         </Text>
-
-        {/* <View
-          style={{
-            flexDirection: 'row',
-            justifyContent: 'space-between',
-            marginBottom: 30,
-          }}>
-          <TouchableOpacity
-            onPress={() => {}}
-            style={{
-              borderColor: '#ddd',
-              borderWidth: 2,
-              borderRadius: 10,
-              paddingHorizontal: 30,
-              paddingVertical: 10,
-            }}>
-            <GoogleSVG height={24} width={24} />
-          </TouchableOpacity>
-          <TouchableOpacity
-            onPress={() => {}}
-            style={{
-              borderColor: '#ddd',
-              borderWidth: 2,
-              borderRadius: 10,
-              paddingHorizontal: 30,
-              paddingVertical: 10,
-            }}>
-            <FacebookSVG height={24} width={24} />
-          </TouchableOpacity>
-          <TouchableOpacity
-            onPress={() => {}}
-            style={{
-              borderColor: '#ddd',
-              borderWidth: 2,
-              borderRadius: 10,
-              paddingHorizontal: 30,
-              paddingVertical: 10,
-            }}>
-            <TwitterSVG height={24} width={24} />
-          </TouchableOpacity>
-        </View> */}
-
-        {/* <Text style={{textAlign: 'center', color: '#666', marginBottom: 30}}>
-          Or, register with email ...
-        </Text> */}
 
         <View
           style={{
@@ -195,40 +146,6 @@ const RegisterScreen = ({navigation}) => {
             <Text style={{color: ActiveColor.button , fontWeight: '700'}}></Text>
           </TouchableOpacity>
         </View>
-        {/* <View
-          style={{
-            flexDirection: 'row',
-            borderBottomColor: '#ccc',
-            borderBottomWidth: 1,
-            paddingBottom: 8,
-            marginBottom: 30,
-          }}>
-
-          <MaterialCommunityIcons name='image-multiple-outline' size={20} color={"#666"} style={{marginRight: 5}} />    
-
-          <TouchableOpacity onPress={() => setOpen(true)}>
-            <Text style={{color: '#666', marginLeft: 5, marginTop: 5}}>
-              {dobLabel}
-            </Text>
-          </TouchableOpacity>
-        </View> */}
-
-        {/* <DatePicker
-          modal
-          open={open}
-          date={date}
-          mode={'date'}
-          maximumDate={new Date('2005-01-01')}
-          minimumDate={new Date('1980-01-01')}
-          onConfirm={date => {
-            setOpen(false);
-            setDate(date);
-            setDobLabel(date.toDateString());
-          }}
-          onCancel={() => {
-            setOpen(false);
-          }}
-        /> */}
 
         <TouchableOpacity
           onPress={() => {

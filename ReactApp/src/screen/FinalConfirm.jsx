@@ -13,8 +13,6 @@ const FinalConfirm = ({navigation, route}) => {
     setCurrentDate(today.toString()); // Or use other formatting methods
   }, []);
   let ActiveColor = colors[theme.mode];
-  // console.log("ROUTE")
-  // console.log(route)
   let selectedItems = route.params.Select 
   let people = route.params.People;
   let tax = route.params.Tax;
@@ -41,8 +39,6 @@ const FinalConfirm = ({navigation, route}) => {
   taxperperson = (total*parseFloat(tax)/100)/parseFloat(count)
   console.log("TAX")
   console.log(taxperperson)
-  // console.log(selectedItems)
-  // console.log(people)
 
   const groupBySelectedId = (selectedItems, people) => {
     const groupedItems = {};
@@ -87,7 +83,6 @@ const FinalConfirm = ({navigation, route}) => {
       console.log("    - Price:", (item.price/(item.selectedBy).length).toFixed(2));
       console.log("    - Quantity:", item.quantity);
       console.log(currentDate)
-      // console.log("    - Selected By:", (item.selectedBy).length); // Print selectedBy as well
     }
     console.log("---"); // Separator between users
   }

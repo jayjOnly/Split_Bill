@@ -20,9 +20,6 @@ export default function Example({navigation, route}) {
   const [usersname, setusername] = useState()
   React.useEffect(() => {
     if(route.params != undefined){
-      // console.log("------------------")
-      // console.log(route)
-      // console.log("------------------")
       setusername(route.params.username)
     }
   })
@@ -228,7 +225,6 @@ export default function Example({navigation, route}) {
               <Switch
                 value={isActive}
                 onValueChange={handleSwitch}
-                // thumbColor={isActive? '#fff' : '#000000'}
               />
             </View>
 
