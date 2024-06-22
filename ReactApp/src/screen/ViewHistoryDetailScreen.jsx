@@ -1,13 +1,78 @@
-import { StyleSheet, Text, TouchableOpacity, View, Image } from 'react-native'
-import React from 'react'
+import { StyleSheet, Text, TouchableOpacity, View, Image, Button, FlatList } from 'react-native'
+import React, { useState } from 'react'
 import AntDesign from 'react-native-vector-icons/AntDesign'
 import { ThemeContext } from '../context/ThemeContext';
 import { useContext } from 'react';
 import { colors } from '../config/theme';
 
-const ViewHistoryDetailScreen = ({navigation}) => {
+const ViewHistoryDetailScreen = ({navigation, route}) => {
   const {theme} = useContext(ThemeContext);
   let ActiveColor = colors[theme.mode]
+  let groupID = route.params.groupID
+  let assignID = route.params.assignID
+
+  const[datas, getdatas] = useState([])
+
+  const getUserData = async () => {
+    try {
+      const response = await fetch(
+        `http://10.20.155.173:4444/historydetail?groupID=${groupID}&assignID=${assignID}`
+      );
+      
+      if (!response.ok) {
+        // console.log(response)
+        throw new Error(`Error fetching data: ${response.status}`);
+      }
+      
+      const data = await response.json();
+      getdatas(data)
+    } catch (error) {
+      console.error(error);
+    }
+  };
+
+  React.useEffect(() => {
+    if (assignID && groupID) {
+      getUserData();
+    }
+  }, [assignID, groupID]); 
+
+  console.log(datas)
+
+  const groupDataByUser = (data) => {
+    const groupedData = data.reduce((acc, item) => {
+      if (!acc[item.userID]) {
+        acc[item.userID] = {
+          userID: item.userID,
+          username: item.username,
+          items: []
+        };
+      }
+      acc[item.userID].items.push({ itemName: item.itemName, itemPrice: item.itemPrice });
+      return acc;
+    }, {});
+  
+    // Sort items within each user group
+    Object.values(groupedData).forEach(user => {
+      user.items.sort((a, b) => a.itemName === 'TAX' ? 1 : (b.itemName === 'TAX' ? -1 : 0));
+    });
+  
+    return groupedData;
+  };
+  
+  const groupedData = groupDataByUser(datas);
+  const groupedArray = Object.values(groupedData);
+
+  const renderItem = ({ item }) => (
+    <View style={styles.userContainer}>
+      <Text style={styles.username}>{item.username}</Text>
+      {item.items.map((itemDetail, index) => (
+        <View key={index} style={styles.itemContainer}>
+          <Text style={styles.itemText}>{itemDetail.itemName}: {itemDetail.itemPrice}</Text>
+        </View>
+      ))}
+    </View>
+  );
 
   const styles = StyleSheet.create({
     screen:{
@@ -15,10 +80,6 @@ const ViewHistoryDetailScreen = ({navigation}) => {
       justifyContent:'center',
       backgroundColor: ActiveColor.background,
       paddingBottom:18
-    },
-    user:{
-      flexDirection:'row',
-      marginTop:10
     },
     BackButton:{
       marginLeft:15,
@@ -34,73 +95,33 @@ const ViewHistoryDetailScreen = ({navigation}) => {
       marginRight:15,
       color: ActiveColor.text
     },
-    text:{
-      marginBottom:5,
-      fontFamily:'Montserrat-Light',
-      fontSize:20,
-      color: ActiveColor.text
+    container: {
+      flex: 1,
+      padding: 20,
+      backgroundColor: '#f8f8f8'
     },
-    text2:{
-      marginBottom:8,
-      fontSize:22,
-      fontFamily:'Montserrat-Regular',
-      color: ActiveColor.label
+    userContainer: {
+      marginBottom: 20,
+      padding: 15,
+      backgroundColor: '#fff',
+      borderRadius: 10,
+      shadowColor: '#000',
+      shadowOpacity: 0.1,
+      shadowOffset: { width: 0, height: 2 },
+      shadowRadius: 5,
+      elevation: 3
     },
-    text3:{
-      alignSelf: "center",
-      fontSize:17,
-      fontFamily:'Montserrat-Regular',
-      color: ActiveColor.label
-    },
-    text4:{
-      alignSelf: 'center',
-      fontSize:17,
-      fontFamily:'Montserrat-Regular',
-      marginLeft:70,
-      color: ActiveColor.label
-    },
-    profileAvatar: {
-      width: 50,
-      height: 50,
-      borderRadius: 9999,
-    },
-    row: {
-      flexDirection: 'row',
-      marginBottom: 5,
-    },
-    label: {
-      width: 120, 
-      marginRight: 180,
-      fontSize:17,
-      fontFamily:'Montserrat-Regular',
-      color: ActiveColor.label,
-    },
-    value: {
-      fontSize: 17,
-      fontFamily:'Montserrat-Regular',
-      color: ActiveColor.label,
-    },
-    line:{
-      margin:15, flexDirection:"row", 
-      height: 1.5, 
-      backgroundColor: ActiveColor.text
-    },
-    signout: {
-      marginTop:10,
-      alignItems: 'center',
-      alignSelf:"center",
-      height: 40,
-      width:370,
-      backgroundColor: '#E71919',
-      borderRadius: 15,
-      marginBottom: 12,
-    },
-    signoutLabel:{
-      fontSize: 17,
-      color: '#FFFFFF',
+    username: {
+      fontSize: 18,
       fontWeight: 'bold',
-      margin:7
+      marginBottom: 10
     },
+    itemContainer: {
+      marginBottom: 5
+    },
+    itemText: {
+      fontSize: 16
+    }
   })
 
   return (
@@ -118,96 +139,15 @@ const ViewHistoryDetailScreen = ({navigation}) => {
         <Text style={styles.title}>Details</Text>
       </View>
 
-      <View style={{backgroundColor: ActiveColor.background2, marginHorizontal:10, marginVertical: 10, borderRadius:20, paddingVertical:25}}>
-        <View style={{marginLeft:25}}>
-          <Text style={styles.text2}>Judul | DD-MM-YY</Text>
-          <Text style={styles.text2}>Total Bill = Rp. 2.000.000</Text>
-        </View>
-
-        <View style={{marginLeft:30, marginTop:30}}>
-          <Text style={styles.text2}>Details</Text>
-        </View>
-
-
-          
-        <View style={{marginLeft:30}}>
-         <View style={styles.user}>
-            <Image
-                alt=""
-                source={{
-                  uri: 'https://images.unsplash.com/photo-1633332755192-727a05c4013d?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=facearea&facepad=2.5&w=256&h=256&q=80',
-                }}
-                style={styles.profileAvatar} />
-            <View style={{marginLeft:20}}>
-              <Text style={{fontSize:15, fontFamily:'Montserrat-Regular', color: ActiveColor.label}}>Osama</Text>
-              <Text style={{fontSize:20, fontFamily:'Montserrat-Regular', color: ActiveColor.label}}>Rp. 911.000</Text>
-            </View>
-          </View>
-
-          <View style={{flexDirection:'row', marginTop:18, alignItems:"center"}}>
-            <Text style={styles.text3}>Benda</Text>
-            <Text style={styles.text4}>x1</Text>
-            <Text style={styles.text4}>Rp. 900.000</Text>
-          </View>
-          <View style={{flexDirection:'row', marginTop:2, alignItems:"center"}}>
-            <Text style={styles.text3}>Benda</Text>
-            <Text style={styles.text4}>x1</Text>
-            <Text style={styles.text4}>Rp. 11.000</Text>
-          </View>
-        </View>
-      
-        <View style={styles.line} />
-
-        <View style={{marginLeft:30}}>
-          <View style={styles.user}>
-            <Image
-                alt=""
-                source={{
-                  uri: 'https://images.unsplash.com/photo-1633332755192-727a05c4013d?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=facearea&facepad=2.5&w=256&h=256&q=80',
-                }}
-                style={styles.profileAvatar} />
-            <View style={{marginLeft:20}}>
-              <Text style={{fontSize:15, fontFamily:'Montserrat-Regular', color: ActiveColor.label}}>Hitlah</Text>
-              <Text style={{fontSize:20, fontFamily:'Montserrat-Regular', color: ActiveColor.label}}>Rp. 1.099.000</Text>
-            </View>
-          </View>
-
-          <View style={{flexDirection:'row', marginTop:18, alignItems:"center"}}>
-            <Text style={styles.text3}>Benda</Text>
-            <Text style={styles.text4}>x1</Text>
-            <Text style={styles.text4}>Rp. 1.099.000</Text>
-          </View>
-        </View>
-
-        <View style={styles.line} />  
-
-        <View style={{marginLeft:30}}>
-          <View style={styles.row}>
-            <Text style={styles.label}>Tax</Text>
-            <Text style={styles.value}>0</Text>
-          </View>
-          <View style={styles.row}>
-            <Text style={styles.label}>Service Fee</Text>
-            <Text style={styles.value}>0</Text>
-          </View>
-          <View style={styles.row}>
-            <Text style={styles.label}>Discount</Text>
-            <Text style={styles.value}>0</Text>
-          </View>
-          <View style={styles.row}>
-            <Text style={styles.label}>Others</Text>
-            <Text style={styles.value}>0</Text>
-          </View>  
-        </View>
-          
+      <View style={styles.container}>
+        <FlatList
+          data={groupedArray}
+          renderItem={renderItem}
+          keyExtractor={(item) => item.userID.toString()}
+        />
       </View>
-        <TouchableOpacity
-              onPress={() => navigation.navigate("BottomTab")}
-              style={styles.signout}>
-
-              <Text style={styles.signoutLabel}>Send Details</Text>
-        </TouchableOpacity>
-    </View>
+      {/* <Button title="Fetch Data" onPress={handleFetchData} /> */}
+    </View>  
   )
 }
 

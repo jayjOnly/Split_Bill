@@ -10,7 +10,7 @@ import { useContext } from 'react';
 const getUserData = async (userId) => {
   try {
     const response = await fetch(
-      `http://172.16.1.241:1115/activitylist?users=${userId}`
+      `http://10.20.155.173:1115/activitylist?users=${userId}`
     );
     
     if (!response.ok) {
@@ -94,13 +94,6 @@ const HomeScreen = ({navigation, route}) => {
   })
 
   const [data, setData] = useState([])
-
-  useEffect(() => {
-    fetch('http://172.16.0.29:8080/activityhistory') //ganti IPnya sama kek IP PC anda
-    .then(res => res.json())
-    .then(data => setData(data))
-    .catch(err => console.log(err))
-  }, [])
 
   return (
     <SafeAreaView style={{flex:1}}>

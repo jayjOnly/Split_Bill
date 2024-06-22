@@ -8,7 +8,7 @@ import { useContext } from 'react';
 const getUserData = async (userId) => {
   try {
     const response = await fetch(
-      `http://172.16.0.29:1113/activitylist?users=${userId}`
+      `http://10.20.155.173:1113/activitylist?users=${userId}`
     );
     
     if (!response.ok) {
@@ -94,7 +94,7 @@ const HistoryScreen = ({navigation, route}) => {
     activity:{
       backgroundColor: ActiveColor.box,
       paddingHorizontal: 15,
-      paddingBottom:500,
+      paddingBottom:50,
       paddingVertical:15,
       borderRadius:25,
       marginHorizontal:15
@@ -108,8 +108,7 @@ const HistoryScreen = ({navigation, route}) => {
         <ScrollView>
           <View style={styles.activity}>
             {newData.map((d,i) =>
-
-              <HistoryBox key={i} navi={() => navigation.navigate("HistoryDetails")} name={d.itemName} nominal={d.itemPrice} date={d.activityDate}/>
+              <HistoryBox key={i} navi={() => navigation.navigate("HistoryDetails", {groupID: d.groupID, assignID: d.assignID})} name={d.itemName} nominal={Math.round(d.itemPrice)} date={d.activityDate}/>
             )}
           </View>
           
