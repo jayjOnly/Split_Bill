@@ -1,4 +1,4 @@
-192.168.69.1 = Jacky
+List dari page yang butuh diubah IP address nya menjadi local host ketika menjalankan aplikasi:
 
 LoginScreen
 RegisterScreen
