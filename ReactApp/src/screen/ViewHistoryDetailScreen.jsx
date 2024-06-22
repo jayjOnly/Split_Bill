@@ -16,7 +16,7 @@ const ViewHistoryDetailScreen = ({navigation, route}) => {
   const getUserData = async () => {
     try {
       const response = await fetch(
-        `http://10.20.155.173:4444/historydetail?groupID=${groupID}&assignID=${assignID}`
+        `http://192.168.3.60:4444/historydetail?groupID=${groupID}&assignID=${assignID}`
       );
       
       if (!response.ok) {

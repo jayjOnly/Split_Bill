@@ -25,7 +25,7 @@ const RegisterScreen = ({navigation}) => {
   let ActiveColor = colors[theme.mode]
 
   const handleRegister = () => {
-    fetch('http://192.168.69.1:2525/usertable', {
+    fetch('http://192.168.3.60:2525/usertable', {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json'

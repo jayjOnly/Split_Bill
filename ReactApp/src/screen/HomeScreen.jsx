@@ -10,7 +10,7 @@ import { useContext } from 'react';
 const getUserData = async (userId) => {
   try {
     const response = await fetch(
-      `http://10.20.155.173:1115/activitylist?users=${userId}`
+      `http://192.168.3.60:1115/activitylist?users=${userId}`
     );
     
     if (!response.ok) {
@@ -108,7 +108,7 @@ const HomeScreen = ({navigation, route}) => {
 
             <View>
             {newData.map((d,i) =>
-              <ActivityBox key={i} navi={() => navigation.navigate("Details")} name={d.username} nominal={d.itemPrice} date={d.activityDate}/>
+              <ActivityBox key={i} navi={() => navigation.navigate("Details", {groupid: d.groupID})} name={d.username} nominal={d.itemPrice} date={d.activityDate}/>
             )}
             </View>
 

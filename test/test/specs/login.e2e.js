@@ -12,7 +12,7 @@ describe('Login Test', () => {
         await $('//android.widget.TextView[@text="Friends"]').click();
         await $('//android.widget.TextView[@text=""]').click();
 
-        await $('//android.widget.EditText[@text="Input Number"]').setValue("0811-1111-1111");
+        await $('//android.widget.EditText[@text="Input Number"]').setValue("0812 2525 2255");
         await $('//android.view.ViewGroup[@content-desc="Add Friend"]').click();
 
     });

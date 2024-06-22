@@ -94,7 +94,7 @@ const FinalConfirm = ({navigation, route}) => {
  
 
   const handleAddActivity = async () => {
-    fetch('http://192.168.69.1:5000/activitylist', {
+    fetch('http://192.168.3.60:5000/activitylist', {
         method: 'POST',
         headers: {
             'Content-Type': 'application/json'

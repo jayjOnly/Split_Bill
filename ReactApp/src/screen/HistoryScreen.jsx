@@ -8,7 +8,7 @@ import { useContext } from 'react';
 const getUserData = async (userId) => {
   try {
     const response = await fetch(
-      `http://10.20.155.173:1113/activitylist?users=${userId}`
+      `http://192.168.3.60:1113/activitylist?users=${userId}`
     );
     
     if (!response.ok) {

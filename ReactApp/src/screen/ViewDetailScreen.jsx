@@ -1,13 +1,64 @@
 import { StyleSheet, Text, TouchableOpacity, View, Image } from 'react-native'
-import React from 'react'
+import React, { useState, useEffect } from 'react'
 import AntDesign from 'react-native-vector-icons/AntDesign'
 import { ThemeContext } from '../context/ThemeContext';
 import { useContext } from 'react';
 import { colors } from '../config/theme';
 
-const ViewDetailScreen = ({navigation}) => {
-  const {theme} = useContext(ThemeContext);
+const getUserData = async (userId) => {
+  try {
+    const response = await fetch(
+      `http://192.168.3.60:1115/activitylist?users=${userId}`
+    );
+    
+    if (!response.ok) {
+      // console.log(response)
+      throw new Error(`Error fetching data: ${response.status}`);
+    }
+    
+    const data = await response.json();
+    return data;
+  } catch (error) {
+    console.error(error);
+  }
+};
+
+const ViewDetailScreen = ({navigation, route}) => {
+  const {theme, id, usersname} = useContext(ThemeContext);
   let ActiveColor = colors[theme.mode]
+  const[groupid, setgroupId] = useState('')
+  if(route.params != undefined){
+    React.useEffect(() => { 
+      console.log(route.params.groupid)
+      setgroupId(route.params.groupid)  
+    }, [])
+    
+  }
+
+  const[datas, getdatas] = useState([])
+  React.useEffect(() => { 
+    console.log("satu")
+    const fetchData = async (x) => {
+      try {
+        const data = await getUserData(x);
+        getdatas(data);
+      } catch (error) {
+        console.error(error);
+        // Handle errors appropriately, like displaying an error message
+      }
+    };
+
+    fetchData(id)
+    
+  }, [])
+  console.log("=========================================")
+  console.log(datas)
+  console.log(groupid)
+
+  
+const newData = datas.filter(item => item.groupID === groupid);
+
+console.log(newData);
 
   const styles = StyleSheet.create({
     screen:{
@@ -127,35 +178,14 @@ const ViewDetailScreen = ({navigation}) => {
         <Text style={styles.des}>Day, DD Months YYYY</Text>
       </View>
       
-
       <View style={styles.box}>
-          <View style={{justifyContent:'center',flexDirection:'row'}}>
-            <Text style={styles.text}>Benda</Text>
-            <Text style={styles.text}>x1</Text>
-            <Text style={styles.text}>Rp. 1.099.000</Text>
+        {newData.map((d,i) =>
+          <View key={i} style={{justifyContent:'center',flexDirection:'row'}}>
+            <Text style={styles.text}>{d.itemName}</Text>
+            <Text style={styles.text}>{d.itemPrice}</Text>
           </View>
-          
-          <View style={{justifyContent:'center',flexDirection:'row'}}>
-            <Text style={styles.text}>Benda</Text>
-            <Text style={styles.text}>x1</Text>
-            <Text style={styles.text}>Rp. 1.099.000</Text>
-          </View>
-          
-          <View style={styles.line} />
-          
-          <View style={styles.row}>
-            <Text style={styles.label}>Total</Text>
-            <Text style={styles.value}>Rp0</Text>
-          </View>
-
+        )}
       </View>
-      
-        <TouchableOpacity
-              onPress={() => navigation.navigate("BottomTab")}
-              style={styles.signout}>
-
-              <Text style={styles.signoutLabel}>Lihat Bukti Pembayaran</Text>
-        </TouchableOpacity>
     </View>
   )
 }

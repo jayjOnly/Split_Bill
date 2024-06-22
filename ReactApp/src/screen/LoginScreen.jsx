@@ -25,7 +25,7 @@ const LoginScreen = ({navigation}) => {
 
   const handleLogin = async () => {
     // Make a POST request to your backend server
-    const response = await fetch('http://10.20.155.173:5555/usertable', {
+    const response = await fetch('http://192.168.3.60:5555/usertable', {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json'

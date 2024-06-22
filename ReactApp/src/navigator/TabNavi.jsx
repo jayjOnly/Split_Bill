@@ -209,6 +209,7 @@ const TabNavi = ({ navigation, route}) => {
         component={HomeScreen}
         initialParams={userinfo}
         options={{
+          unmountOnBlur: true,
           tabBarLabel: ({ focused, route }) =>
             focused ? getDataForScreen(route).tabBarLabel : null, // Conditionally render label  
           tabBarIcon: ({ focused }) => {
@@ -226,6 +227,7 @@ const TabNavi = ({ navigation, route}) => {
         component={HistoryScreen}
         initialParams={userinfo}
         options={{
+          unmountOnBlur: true,
           tabBarIcon: ({ focused }) => {
             return (
               <View style={{ alignItems: "center", justifyContent: "center" }}>
@@ -346,6 +348,7 @@ const TabNavi = ({ navigation, route}) => {
         component={FriendScreen}
         initialParams={userinfo}
         options={{
+          unmountOnBlur: true,
           tabBarIcon: ({ focused }) => {
             return (
               <View style={{ alignItems: "center", justifyContent: "center" }}>
